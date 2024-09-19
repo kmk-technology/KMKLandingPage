@@ -1,10 +1,10 @@
 import { useState } from "react";
-import "./App.css";
+import "./index.css";
 
 function App() {
   return (
     <>
-      <h1>HomePage</h1>
+      <h1 className="text-3xl font-bold underline underline">Hello world!</h1>
     </>
   );
 }
