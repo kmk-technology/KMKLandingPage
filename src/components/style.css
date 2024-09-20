@@ -1,0 +1,67 @@
+/* styles.css */
+
+/* PLATFORM */
+.platform-container {
+  @apply flex w-full items-center bg-gray-200 justify-center overflow-y-auto relative;
+}
+.box-container {
+  @apply flex w-full items-center justify-center overflow-y-auto relative;
+}
+.platform-content {
+  @apply flex flex-col md:flex-row items-center justify-between w-full container p-4 bg-gray-200 rounded-lg;
+}
+
+.platform-title {
+  @apply text-sky-500 font-bold text-lg md:text-3xl lg:text-5xl text-center;
+}
+
+.platform-description {
+  @apply text-gray-900 text-sm sm:text-base md:text-lg lg:text-xl text-center max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl;
+}
+
+.platform-item-title {
+  @apply font-bold text-gray-600 text-lg relative md:text-2xl mb-4;
+}
+
+.platform-icon-container {
+  @apply flex flex-wrap justify-center gap-6;
+}
+
+.platform-icon {
+  @apply w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 flex items-center justify-center p-4 bg-white rounded-full overflow-hidden shadow-lg;
+}
+
+/*CorporateClients*/
+.scrolling-container {
+  padding: 2%;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.scrolling-item {
+  flex-shrink: 0;
+  margin-right: 2rem;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.scrolling-item {
+  min-width: 100px;
+  margin-right: 16px;
+  transition: transform 0.3s ease;
+}
+
+.scrolling-item:hover {
+  transform: scale(1.2);
+}
