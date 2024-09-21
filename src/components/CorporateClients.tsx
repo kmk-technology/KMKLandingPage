@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
+import { motion } from "framer-motion";
 import IconAC from "../assets/svg/corporate/an-cuong.svg";
 import IconPepsi from "../assets/svg/corporate/pepsico-logo.svg";
 import IconVt from "../assets/svg/corporate/viettien.svg";
@@ -23,55 +24,80 @@ const CorporateItems = [
   { name: "LUCKY GROUP", logo: IconLucky },
 ];
 
-const MedicalItems = [
-  { name: "Medi1", logo: IconLucky },
-  { name: "Medi2", logo: IconLucky },
-  { name: "Medi3", logo: IconLucky },
-  { name: "Medi4", logo: IconLucky },
-  { name: "Medi5", logo: IconLucky },
-  { name: "Medi6", logo: IconLucky },
-  { name: "Medi7", logo: IconLucky },
-  { name: "Medi8", logo: IconLucky },
-  { name: "Medi9", logo: IconLucky },
-  { name: "Medi10", logo: IconLucky },
-];
+const MedicalItems = Array.from({ length: 10 }, (_, i) => ({
+  name: `Medi${i + 1}`,
+  logo: IconPepsi,
+}));
 
 const ClientsSection: React.FC<{
   title: string;
   items: { name: string; logo: string }[];
 }> = ({ title, items }) => {
   const scrollingContainerRef = useRef<HTMLDivElement | null>(null);
-  let isDown = false;
-  let startX = 0;
-  let scrollLeft = 0;
+  const [isDown, setIsDown] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
-    isDown = true;
+  const handleStart = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+    setIsDown(true);
     const clientX = "touches" in e ? e.touches[0].clientX : e.pageX;
-    startX = clientX - (scrollingContainerRef.current?.offsetLeft || 0);
-    scrollLeft = scrollingContainerRef.current?.scrollLeft || 0;
+    setStartX(clientX - (scrollingContainerRef.current?.offsetLeft || 0));
+    setScrollLeft(scrollingContainerRef.current?.scrollLeft || 0);
     e.preventDefault();
-  };
+  }, []);
 
-  const handleEnd = () => {
-    isDown = false;
-  };
+  const handleEnd = useCallback(() => {
+    setIsDown(false);
+  }, []);
 
-  const handleMove = (e: React.MouseEvent | React.TouchEvent) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const clientX = "touches" in e ? e.touches[0].clientX : e.pageX;
-    const walk = (clientX - startX) * 2;
-    scrollingContainerRef.current!.scrollLeft = scrollLeft - walk;
-  };
+  const handleMove = useCallback(
+    (e: React.MouseEvent | React.TouchEvent) => {
+      if (!isDown) return;
+      e.preventDefault();
+
+      const clientX = "touches" in e ? e.touches[0].clientX : e.pageX;
+      const walk = (clientX - startX) * 2;
+
+      requestAnimationFrame(() => {
+        if (scrollingContainerRef.current) {
+          scrollingContainerRef.current.scrollLeft = scrollLeft - walk;
+        }
+      });
+    },
+    [isDown, startX, scrollLeft]
+  );
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (scrollingContainerRef.current) {
+      observer.observe(scrollingContainerRef.current);
+    }
+
+    return () => {
+      if (scrollingContainerRef.current) {
+        observer.unobserve(scrollingContainerRef.current);
+      }
+    };
+  }, []);
 
   return (
-    <section className="bg-gray-100 py-8 w-screen">
+    <section className="platform-container py-8 box-container flex flex-col justify-center items-center">
       <div className="flex flex-col items-center">
         <h2 className="platform-title font-bold m-2">{title}</h2>
         <div
           ref={scrollingContainerRef}
-          className="scrolling-container container bg-gray-100 overflow-hidden whitespace-nowrap cursor-grab"
+          className="scrolling-container container overflow-hidden whitespace-nowrap cursor-grab"
           onMouseDown={handleStart}
           onMouseLeave={handleEnd}
           onMouseUp={handleEnd}
@@ -83,10 +109,15 @@ const ClientsSection: React.FC<{
         >
           <div className="flex space-x-8">
             {items.map((client) => (
-              <div
+              <motion.div
                 key={client.name}
-                className="scrolling-item flex items-center justify-center "
+                className="scrolling-item flex items-center justify-center"
                 style={{ userSelect: "none" }}
+                initial={{ opacity: 0, y: 50 }}
+                animate={
+                  isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
+                }
+                transition={{ duration: 0.5 }}
               >
                 <div className="flex items-center justify-center rounded-lg shadow-lg h-32 w-32 p-1 bg-white">
                   <img
@@ -96,7 +127,7 @@ const ClientsSection: React.FC<{
                     draggable={false}
                   />
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -107,7 +138,7 @@ const ClientsSection: React.FC<{
 
 const CorporateClients: React.FC = () => {
   return (
-    <div className="h-screen container ">
+    <div className="relative box-container bg-gray-100 flex flex-col">
       <ClientsSection title="CORPORATE CLIENTS" items={CorporateItems} />
       <ClientsSection title="MEDICAL CLIENTS" items={MedicalItems} />
     </div>

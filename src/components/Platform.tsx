@@ -12,10 +12,12 @@ import IconPowerApps from "../assets/svg/platform/PowerApps_scalable.svg";
 import IconPowerAutomate from "../assets/svg/platform/PowerAutomate_scalable.svg";
 import IconPowerVirtualAgent from "../assets/svg/platform/power-virtual-agents-colored.svg";
 import { motion } from "framer-motion";
+
 import "../styles/shiny.css";
 import "../App.css";
 import "./style.css";
 import { useEffect, useState } from "react";
+
 const platformItems = [
   {
     title: "APPLICATION PLATFORM",
@@ -65,50 +67,66 @@ function Platform() {
   }, []);
   return (
     <div className="platform-container">
+      <motion.div
+        initial={{ opacity: 1, x: -100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 1 / 2 }}
+        className="rounded-shape"
+      ></motion.div>
       <div className="platform-content">
         <motion.div
           initial={{ opacity: 0, x: "-70px" }}
-          animate={isVisible ? { opacity: 1, x: 0 } : {}}
+          whileInView={isVisible ? { opacity: 1, x: 0 } : {}}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5 }}
           className="flex-1 w-full flex flex-col items-center justify-center p-4 mb-4 md:mb-0"
         >
-          <p className="platform-title">PLATFORM</p>
+          <p className="platform-title ">PLATFORM</p>
           <p className="platform-description">
-            "Our products are highly valued for their efficiency, particularly
-            our supportive services. As a result, we have earned the steadfast
-            trust of our partners and clients."
+            "Our platform is designed to empower businesses with innovative
+            solutions that enhance productivity and streamline operations. We
+            strive to meet the diverse needs of our clients, fostering long-term
+            partnerships built on trust and mutual success."
           </p>
         </motion.div>
 
-        <div className="flex-1 w-full flex flex-col items-center justify-center p-4">
-          {platformItems.map((platform) => (
-            <div key={platform.title} className="w-full text-center mb-6">
-              <p className="platform-item-title">{platform.title}</p>
-              <div className="platform-icon-container ">
-                <div className="circle circle-3"></div>
-                {platform.item.map((iconData, i) => (
-                  <motion.div
-                    key={i}
-                    className="platform-icon shinyContainer "
-                    animate={{
-                      y: [0, -15, 0],
-                    }}
-                    transition={{
-                      duration: 2,
-                      delay: i * 0.1,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    <img
-                      alt={iconData.alt}
-                      src={iconData.icon}
-                      className="w-full h-full object-contain"
-                    />
-                  </motion.div>
-                ))}
+        <div className="flex-1 w-full flex flex-col items-center justify-center ">
+          {platformItems.map((platform, index) => (
+            <motion.div
+              initial={{ opacity: 0, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              whileInView={isVisible ? { opacity: 2, x: 0.5 } : {}}
+              transition={{ duration: 1, delay: index * 0.2 }}
+            >
+              <div key={platform.title} className="w-full text-center mb-6">
+                <p className="platform-item-title">{platform.title}</p>
+                <div className="platform-icon-container ">
+                  {platform.item.map((iconData, i) => (
+                    <motion.div
+                      key={i}
+                      className="platform-icon shinyContainer "
+                      animate={{
+                        y: [0, -6, 0],
+                      }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{
+                        duration: 2,
+                        delay: i * 1,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    >
+                      <img
+                        alt={iconData.alt}
+                        src={iconData.icon}
+                        className="w-full h-full object-contain"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
