@@ -28,11 +28,9 @@ const MedicalItems = Array.from({ length: 10 }, (_, i) => ({
   name: `Medi${i + 1}`,
   logo: IconPepsi,
 }));
-
 const ClientsSection: React.FC<{
-  title: string;
   items: { name: string; logo: string }[];
-}> = ({ title, items }) => {
+}> = ({ items }) => {
   const scrollingContainerRef = useRef<HTMLDivElement | null>(null);
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -94,7 +92,6 @@ const ClientsSection: React.FC<{
   return (
     <section className="platform-container py-8 box-container flex flex-col justify-center items-center">
       <div className="flex flex-col items-center">
-        <h2 className="platform-title font-bold m-2">{title}</h2>
         <div
           ref={scrollingContainerRef}
           className="scrolling-container container overflow-hidden whitespace-nowrap cursor-grab"
@@ -113,13 +110,13 @@ const ClientsSection: React.FC<{
                 key={client.name}
                 className="scrolling-item flex items-center justify-center"
                 style={{ userSelect: "none" }}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 100 }}
                 animate={
                   isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
                 }
                 transition={{ duration: 0.5 }}
               >
-                <div className="flex items-center justify-center rounded-lg shadow-lg h-32 w-32 p-1 bg-white">
+                <div className="flex items-center justify-center rounded-lg shadow-lg h-32 w-32 bg-white">
                   <img
                     src={client.logo}
                     alt={client.name}
@@ -139,8 +136,10 @@ const ClientsSection: React.FC<{
 const CorporateClients: React.FC = () => {
   return (
     <div className="relative box-container bg-gray-100 flex flex-col">
-      <ClientsSection title="CORPORATE CLIENTS" items={CorporateItems} />
-      <ClientsSection title="MEDICAL CLIENTS" items={MedicalItems} />
+      <h2 className="platform-title font-bold m-2">CORPORATE CLIENTS</h2>{" "}
+      <ClientsSection items={CorporateItems} />
+      <h2 className="platform-title font-bold m-2">MEDICAL CLIENTS</h2>
+      <ClientsSection items={MedicalItems} />
     </div>
   );
 };

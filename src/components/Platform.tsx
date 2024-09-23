@@ -16,7 +16,6 @@ import { motion } from "framer-motion";
 import "../styles/shiny.css";
 import "../App.css";
 import "./style.css";
-import { useEffect, useState } from "react";
 
 const platformItems = [
   {
@@ -56,28 +55,20 @@ const platformItems = [
   },
 ];
 function Platform() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
   return (
     <div className="platform-container">
       <motion.div
-        initial={{ opacity: 1, x: -100 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 1 / 2 }}
+        initial={{ opacity: 1, x: -100, y: -50 }}
+        whileInView={{ opacity: 1, x: 0, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 2 }}
         className="rounded-shape"
       ></motion.div>
+
       <div className="platform-content">
         <motion.div
           initial={{ opacity: 0, x: "-70px" }}
-          whileInView={isVisible ? { opacity: 1, x: 0 } : {}}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5 }}
           className="flex-1 w-full flex flex-col items-center justify-center p-4 mb-4 md:mb-0"
@@ -96,7 +87,7 @@ function Platform() {
             <motion.div
               initial={{ opacity: 0, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              whileInView={isVisible ? { opacity: 2, x: 0.5 } : {}}
+              whileInView={{ opacity: 2, x: 0.5 }}
               transition={{ duration: 1, delay: index * 0.2 }}
             >
               <div key={platform.title} className="w-full text-center mb-6">

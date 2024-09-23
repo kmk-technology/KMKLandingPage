@@ -41,6 +41,7 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  scrollbar-width: none;
 }
 
 .scrolling-item {
@@ -64,6 +65,9 @@
 
 .scrolling-item:hover {
   transform: scale(1.2);
+}
+.scrolling-container::-webkit-scrollbar {
+  display: none;
 }
 /*Products*/
 .product-button {

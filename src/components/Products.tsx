@@ -48,7 +48,7 @@ export default function Products() {
         </motion.div>
       </div>
 
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center ">
         {data.map((item, index) => (
           <motion.div
             key={item.name}
@@ -56,18 +56,18 @@ export default function Products() {
             whileInView={{ opacity: 1, y: -90 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.2, delay: index * 0.1 }}
-            className="card relative transform -translate-y-20 z-10 p-5 hover:shinyContainer"
+            className="card relative transform  z-10 p-5 shinyContainer "
           >
             <img
               src={item.image}
               alt={item.name}
-              className="w-full p-12 h-auto object-contain max-w-xs md:max-w-xs lg:max-w-sm transition-transform duration-150"
+              className="w-full p-12 h-auto object-contain max-w-xs md:max-w-xs lg:max-w-sm "
             />
 
             <h1 className="font-bold text-xl text-blue-500 text-center">
               {item.name}
             </h1>
-            <p className="text-center text-sm text-gray-500">{item.sub}</p>
+            <p className="text-center text-sm font-bold text-gray-500">{item.sub}</p>
             {/* Button */}
             <a href={item.link}>
               <div className="button group">
