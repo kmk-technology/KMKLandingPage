@@ -1,9 +1,20 @@
 /* styles.css */
 
-/* PLATFORM */
 .platform-container {
-  @apply flex w-full items-center  justify-center overflow-y-auto relative;
+  background-image: url("/home/bg4.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+.pre-container {
+  background-image: url("/home/bg4.svg");
+  background-size: cover; /* Hoặc 'contain', tùy thuộc vào cách bạn muốn hiển thị hình ảnh */
+  background-repeat: no-repeat; /* Không lặp lại hình ảnh nền */
+  background-position: center; /* Căn giữa hình ảnh nền */
+
+  @apply flex w-full items-center justify-center overflow-y-auto relative;
+}
+
 .box-container {
   @apply flex w-full items-center justify-center overflow-y-auto relative;
 }
@@ -12,11 +23,11 @@
 }
 
 .platform-title {
-  @apply bg-[#2176F5] bg-clip-text text-transparent font-bold text-lg md:text-3xl lg:text-5xl text-center;
+  @apply bg-[#002249] bg-clip-text text-transparent font-bold text-lg md:text-3xl lg:text-5xl text-center;
 }
 
 .platform-description {
-  @apply text-gray-900 text-sm sm:text-base md:text-lg lg:text-xl text-center max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl;
+  @apply text-gray-900 text-sm sm:text-base md:text-lg lg:text-xl text-center max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl;
 }
 
 .platform-item-title {
@@ -167,3 +178,6 @@
 .shadowinner {
   box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.3);
 }
+/* 2176F5 */
+/* 00B14F */
+/* text - 002249 */
