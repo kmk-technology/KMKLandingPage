@@ -10,7 +10,7 @@ module.exports = {
         neutralGrey: "#1B1B1B",
       },
       fontFamily: {
-        sans: ["Poppins", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
       },
     },
   },

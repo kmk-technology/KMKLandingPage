@@ -32,7 +32,7 @@ const data = [
 
 export default function Services() {
   return (
-    <div className="relative box-container bg-gray-100 flex flex-col justify-center items-center bg-gradient-to-r from-blue-500 to-purple-500">
+    <div className="relative box-container flex flex-col justify-center items-center bg-[#2176F5]">
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}

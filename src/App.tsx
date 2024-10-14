@@ -1,3 +1,4 @@
+import Contact from "./components/Contact";
 import CorporateClients from "./components/CorporateClients";
 import Platform from "./components/Platform";
 import Products from "./components/Products";
@@ -11,6 +12,7 @@ function App() {
       <Services />
       <Products />
       <CorporateClients />
+      <Contact />
     </>
   );
 }
