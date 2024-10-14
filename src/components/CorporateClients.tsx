@@ -1,86 +1,54 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
-import IconAC from "../assets/svg/corporate/an-cuong.svg";
-import IconPepsi from "../assets/svg/corporate/pepsico-logo.svg";
-import IconVt from "../assets/svg/corporate/viettien.svg";
-import IconJia from "../assets/logo/jiahsin-logo.png";
-import IconOfi from "../assets/logo/ofi-logo.png";
-import IconShim from "../assets/logo/shimmer-logo.png";
-import IconHl from "../assets/logo/qhl-logo.png";
-import IconTcsc from "../assets/logo/tcsc-logo.png";
-import IconLucky from "../assets/logo/lucky-logo.png";
-//medical
-import iconTamAn from "../assets/logo/medical/taman.png";
-import iconQueenHopital from "../assets/logo/medical/queenhopital.png";
-import iconMeccare from "../assets/logo/medical/meccare.png";
-import iconHoangKhang from "../assets/logo/medical/hoangkhang.png";
-import iconPkPhuocLinh from "../assets/logo/medical/phuoclinh.jpg";
-import iconPkdk115 from "../assets/logo/medical/pkdk115.jpg";
-import iconYd115 from "../assets/logo/medical/yduoc115.png";
-import iconAa from "../assets/logo/medical/aa.png";
-import iconPkThanhCong from "../assets/logo/medical/thanhcong.jpg";
-import iconTtPhulam from "../assets/logo/medical/phulam.png";
-import iconThienHau from "../assets/logo/medical/thienhau.jpg";
-import iconHungDung from "../assets/logo/medical/hungdung.jpg";
-import iconPAplus from "../assets/logo/medical/pa+.png";
-import iconJT from "../assets/logo/medical/JTAngel.png";
-import iconYhgdPhuochoa from "../assets/logo/medical/yhgdPH.png";
-import iconNgocChau from "../assets/logo/medical/ngocchau.png";
-import iconLoukas from "../assets/logo/medical/loukas.png";
-import iconHanhPhuc from "../assets/logo/medical/hanhphuc.png";
-import iconThienphuc from "../assets/logo/medical/thienphuc.png";
-import iconSvg from "../assets/logo/medical/svg.png";
-import iconPainclinic from "../assets/logo/medical/painclinic.jpg";
-import iconSonca from "../assets/logo/medical/sonca.png";
-import iconPkydHunglong from "../assets/logo/medical/hunglong.jpg";
-import iconCclinic from "../assets/logo/medical/cclinic.png";
-import iconBvSgCuuLong from "../assets/logo/medical/saigoncuulong.png";
-import iconTimec from "../assets/logo/medical/timec.png";
 
 import "../App.css";
 import "./style.css";
 
 const CorporateItems = [
-  { name: "Pepsico", logo: IconPepsi },
-  { name: "An Cường", logo: IconAC },
-  { name: "OFI", logo: IconOfi },
-  { name: "SHIMMER", logo: IconShim },
-  { name: "Quảng Hưng Long", logo: IconHl },
-  { name: "TCSC", logo: IconTcsc },
-  { name: "VIETTIEN", logo: IconVt },
-  { name: "JIA HSIN", logo: IconJia },
-  { name: "LUCKY GROUP", logo: IconLucky },
+  { name: "Pepsico", logo: "/svg/corporate/pepsico-logo.svg" },
+  { name: "An Cường", logo: "/svg/corporate/an-cuong.svg" },
+  { name: "OFI", logo: "/logo/ofi-logo.png" },
+  { name: "SHIMMER", logo: "/logo/shimmer-logo.png" },
+  { name: "Quảng Hưng Long", logo: "/logo/qhl-logo.png" },
+  { name: "TCSC", logo: "/logo/tcsc-logo.png" },
+  { name: "VIETTIEN", logo: "/svg/corporate/viettien.svg" },
+  { name: "JIA HSIN", logo: "/logo/jiahsin-logo.png" },
+  { name: "LUCKY GROUP", logo: "/logo/lucky-logo.png" },
 ];
 
 const MedicalItems = [
-  { name: "PKDK Tâm An", logo: iconTamAn },
-  { name: "QUEEN HOSPITAL", logo: iconQueenHopital },
-  { name: "MECCARE", logo: iconMeccare },
-  { name: "HOANGKHANG MEDICAL CENTER", logo: iconHoangKhang },
-  { name: "PKDK PHƯỚC LINH", logo: iconPkPhuocLinh },
-  { name: "PKDK SÀI GÒN 115", logo: iconPkdk115 },
-  { name: "CTY CP BV Y DƯỢC 115", logo: iconYd115 },
-  { name: "PK SẢN PHỤ AN PHÚC", logo: iconAa },
-  { name: "PKDK THÀNH CÔNG", logo: iconPkThanhCong },
-  { name: "PHU LAM MEDICAL CENTER", logo: iconTtPhulam },
-  { name: "THIÊN HẬU POLYCLINIC", logo: iconThienHau },
-  { name: "HƯNG DŨNG", logo: iconHungDung },
-  { name: "PK NHI SÀI GÒN - PHÚC AN", logo: iconPAplus },
-  { name: "JT ANGEL", logo: iconJT },
-  { name: "Y HỌC GIA ĐÌNH PHƯỚC HÒA", logo: iconYhgdPhuochoa },
-  { name: "NGỌC CHÂU", logo: iconNgocChau },
-  { name: "PKDK LOUKAS HEALTH CARE", logo: iconLoukas },
-  { name: "SỞ Y TẾ BỆNH VIỆN HẠNH PHÚC", logo: iconHanhPhuc },
-  { name: "THIÊN PHÚC", logo: iconThienphuc },
-  { name: "VIETTIEN", logo: IconVt },
-  { name: "PK TĨNH MẠCH SÀI GÒN", logo: iconSvg },
-  { name: "PAIN CLINIC", logo: iconPainclinic },
-  { name: "SƠN CA", logo: iconSonca },
-  { name: "PKYD SÀI GÒN HƯNG LONG", logo: iconPkydHunglong },
-  { name: "PKDK CHỢ CẦU", logo: iconCclinic },
-  { name: "CTY CP BV SÀI GÒN CỬU LONG", logo: iconBvSgCuuLong },
-  { name: "TIMEC", logo: iconTimec },
+  { name: "PKDK Tâm An", logo: "logo/medical/taman.png" },
+  { name: "QUEEN HOSPITAL", logo: "logo/medical/queenhopital.png" },
+  { name: "MECCARE", logo: "logo/medical/meccare.png" },
+  { name: "HOANGKHANG MEDICAL CENTER", logo: "logo/medical/hoangkhang.png" },
+  { name: "PKDK PHƯỚC LINH", logo: "logo/medical/phuoclinh.jpg" },
+  { name: "PKDK SÀI GÒN 115", logo: "logo/medical/pkdk115.jpg" },
+  { name: "CTY CP BV Y DƯỢC 115", logo: "logo/medical/yduoc115.png" },
+  { name: "PK SẢN PHỤ AN PHÚC", logo: "logo/medical/aa.png" },
+  { name: "PKDK THÀNH CÔNG", logo: "logo/medical/thanhcong.jpg" },
+  { name: "PHU LAM MEDICAL CENTER", logo: "logo/medical/phulam.png" },
+  { name: "THIÊN HẬU POLYCLINIC", logo: "logo/medical/thienhau.jpg" },
+  { name: "HƯNG DŨNG", logo: "logo/medical/hungdung.jpg" },
+  { name: "PK NHI SÀI GÒN - PHÚC AN", logo: "logo/medical/pa+.png" },
+  { name: "JT ANGEL", logo: "logo/medical/JTAngel.png" },
+  { name: "Y HỌC GIA ĐÌNH PHƯỚC HÒA", logo: "logo/medical/yhgdPH.png" },
+  { name: "NGỌC CHÂU", logo: "logo/medical/ngocchau.png" },
+  { name: "PKDK LOUKAS HEALTH CARE", logo: "logo/medical/loukas.png" },
+  { name: "SỞ Y TẾ BỆNH VIỆN HẠNH PHÚC", logo: "logo/medical/hanhphuc.png" },
+  { name: "THIÊN PHÚC", logo: "logo/medical/thienphuc.png" },
+  { name: "VIETTIEN", logo: "/svg/corporate/viettien.svg" },
+  { name: "PK TĨNH MẠCH SÀI GÒN", logo: "logo/medical/svg.png" },
+  { name: "PAIN CLINIC", logo: "logo/medical/painclinic.jpg" },
+  { name: "SƠN CA", logo: "logo/medical/sonca.png" },
+  { name: "PKYD SÀI GÒN HƯNG LONG", logo: "logo/medical/hunglong.jpg" },
+  { name: "PKDK CHỢ CẦU", logo: "logo/medical/cclinic.png" },
+  {
+    name: "CTY CP BV SÀI GÒN CỬU LONG",
+    logo: "logo/medical/saigoncuulong.png",
+  },
+  { name: "TIMEC", logo: "logo/medical/timec.png" },
 ];
+
 const ClientsSection: React.FC<{
   items: { name: string; logo: string }[];
 }> = ({ items }) => {
@@ -143,7 +111,7 @@ const ClientsSection: React.FC<{
   }, []);
 
   return (
-    <section className="platform-container py-5 box-container flex flex-col justify-center items-center">
+    <section className=" py-5 box-container flex flex-col justify-center items-center">
       <div
         ref={scrollingContainerRef}
         className="scrolling-container container overflow-hidden whitespace-nowrap cursor-grab"
@@ -166,7 +134,7 @@ const ClientsSection: React.FC<{
               animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="flex items-center justify-center rounded-lg shadow-lg h-32 w-32 bg-white">
+              <div className="p-2 flex items-center justify-center rounded-xl shadow-lg hover:scale-105 transition-transform hover:shadow-xl h-32 w-32 bg-white">
                 <img
                   src={client.logo}
                   alt={client.name}
@@ -185,7 +153,7 @@ const ClientsSection: React.FC<{
 
 const CorporateClients: React.FC = () => {
   return (
-    <div className="relative box-container bg-gray-100 flex flex-col">
+    <div className="pre-container relative box-container bg-gray-100 flex flex-col">
       <h2 className="platform-title font-bold m-2">CORPORATE CLIENTS</h2>{" "}
       <ClientsSection items={CorporateItems} />
       <h2 className="platform-title font-bold m-2">MEDICAL CLIENTS</h2>

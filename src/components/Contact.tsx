@@ -1,26 +1,20 @@
 import React from "react";
 import moment from "moment";
-import Logo from "../assets/logo/KmkTech.png";
+
 import "typeface-roboto";
 const Contact = () => (
   <React.Fragment>
     <section className="relative py-12 bg-transparent" id="contact">
       <div className="max-w-screen-2xl px-6 xl:px-16 py-10 mx-auto flex flex-col items-center space-y-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-28 w-full">
-          <div className="flex flex-row space-x-4 items-center justify-center">
-            <img
-              src={Logo}
-              className="h-32 w-32 object-contain"
-              alt="KMK Technology Logo"
-            />
-            <div className="text-gray-800 space-y-6">
-              <div className="flex flex-row">
-                <p className="font-bold text-2xl text-gray-800 font-roboto uppercase">
-                  Simplify Your Business
-                  <br /> Innovate for Excellence
-                </p>
-              </div>
-              <p>
+        <div className="flex flex-row justify-between items-start w-full">
+          <div className="flex flex-row space-x-4 items-center">
+            <div className="text-gray-800 space-y-2 w-2/3">
+              <img
+                src={"/logo/kmk/long-logo.png"}
+                alt="KMK Technology Logo"
+                className="w-1/2"
+              />
+              <p className="text-[#424242] font-roboto">
                 We simplify your business operations by streamlining processes
                 and reducing complexity, allowing you to focus on core
                 activities. KMK innovates continuously to deliver cutting-edge
@@ -28,9 +22,11 @@ const Contact = () => (
               </p>
             </div>
           </div>
-          <div className="text-gray-800 space-y-6">
+          <div className="text-gray-800 space-y-4 w-full">
+            {" "}
+            {/* Adjusted space-y for less gap */}
             <p className="font-bold text-2xl">CONTACT US</p>
-            <ul className="space-y-4 text-lg">
+            <ul className="space-y-4 font-roboto">
               <li className="flex flex-wrap items-center space-x-4">
                 <svg
                   className="w-6 h-6 text-gray-700"
@@ -47,10 +43,9 @@ const Contact = () => (
                 </svg>
                 <div className="space-y-2">
                   <a
-                    href="https://kmk-tech.vn"
-                    target="_blank"
+                    href="#"
                     rel="noopener noreferrer"
-                    className=" hover:text-blue-700 transition mr-2"
+                    className="hover:text-blue-700 transition mr-2"
                   >
                     kmk-tech.vn
                   </a>
@@ -58,7 +53,7 @@ const Contact = () => (
                     href="https://medifam.vn"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className=" hover:text-blue-700 transition  mr-2"
+                    className="hover:text-blue-700 transition mr-2"
                   >
                     medifam.vn
                   </a>
@@ -66,7 +61,7 @@ const Contact = () => (
                     href="https://yhgd.vn"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className=" hover:text-blue-700 transition  mr-2"
+                    className="hover:text-blue-700 transition mr-2"
                   >
                     yhgd.vn
                   </a>
@@ -74,13 +69,13 @@ const Contact = () => (
                     href="https://kmksales.vn"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className=" hover:text-blue-700 transition  mr-2"
+                    className="hover:text-blue-700 transition mr-2"
                   >
                     kmksales.vn
                   </a>
                 </div>
               </li>
-
+              {/* Additional contact items remain unchanged */}
               <li className="flex items-center space-x-4">
                 <svg
                   className="w-6 h-6 text-gray-700"
@@ -105,7 +100,6 @@ const Contact = () => (
                   Minh City
                 </p>
               </li>
-
               <li className="flex items-center space-x-4">
                 <svg
                   className="w-6 h-6 text-gray-700"
@@ -121,7 +115,6 @@ const Contact = () => (
                   trung.ht@kmk-tech.vn
                 </a>
               </li>
-
               <li className="flex items-center space-x-4">
                 <svg
                   className="w-6 h-6 text-gray-700"
@@ -144,10 +137,13 @@ const Contact = () => (
       </div>
     </section>
 
-    <footer className="p-4 border-t border-gray-300 text-center bg-white text-gray-700">
+    <footer className="p-4 border-t border-gray-300 text-center bg-white text-gray-700 ml-10 mr-10">
       <p>
         © {moment().format("YYYY")} - All rights reserved by{" "}
-        <span className="font-semibold">KMK TECHNOLOGY COMPANY</span>
+        <span className="font-semibold">
+          <span className="text-[#2176F5]">KMK</span>
+          <span className="text-[#00B14F]">TECHNOLOGY</span>
+        </span>
       </p>
     </footer>
   </React.Fragment>
