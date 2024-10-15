@@ -110,11 +110,25 @@ const ClientsSection: React.FC<{
     };
   }, []);
 
+  const handleItemClick = (index: number) => {
+    if (scrollingContainerRef.current) {
+      const item = scrollingContainerRef.current.children[index] as HTMLElement;
+      const containerWidth = scrollingContainerRef.current.offsetWidth;
+      const itemWidth = item.offsetWidth;
+
+      const scrollTo = item.offsetLeft - containerWidth / 2 + itemWidth / 2;
+      scrollingContainerRef.current.scrollTo({
+        left: scrollTo,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <section className=" py-5 box-container flex flex-col justify-center items-center">
+    <section className="py-5 w-full box-container flex flex-col justify-center items-center">
       <div
         ref={scrollingContainerRef}
-        className="scrolling-container container overflow-hidden whitespace-nowrap cursor-grab"
+        className="scrolling-container container"
         onMouseDown={handleStart}
         onMouseLeave={handleEnd}
         onMouseUp={handleEnd}
@@ -124,7 +138,7 @@ const ClientsSection: React.FC<{
         onTouchMove={handleMove}
         style={{ touchAction: "none" }}
       >
-        <div className="flex flex-row items-center justify-center">
+        <div className="flex items-center justify-start">
           {items.map((client, index) => (
             <motion.div
               key={index}
@@ -133,6 +147,7 @@ const ClientsSection: React.FC<{
               initial={{ opacity: 0, y: 100 }}
               animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.5 }}
+              onClick={() => handleItemClick(index)} // Thêm handler click tại đây
             >
               <div className="p-2 flex items-center justify-center rounded-xl shadow-lg hover:scale-105 transition-transform hover:shadow-xl h-32 w-32 bg-white">
                 <img
@@ -153,8 +168,8 @@ const ClientsSection: React.FC<{
 
 const CorporateClients: React.FC = () => {
   return (
-    <div className="pre-container relative box-container bg-gray-100 flex flex-col">
-      <h2 className="platform-title font-bold m-2">CORPORATE CLIENTS</h2>{" "}
+    <div className="pre-container bg-gray-100 flex flex-col justify-center items-center w-full">
+      <h2 className="platform-title font-bold m-2">CORPORATE CLIENTS</h2>
       <ClientsSection items={CorporateItems} />
       <h2 className="platform-title font-bold m-2">MEDICAL CLIENTS</h2>
       <ClientsSection items={MedicalItems} />
