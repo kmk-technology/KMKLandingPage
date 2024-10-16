@@ -29,8 +29,11 @@ const data = [
 
 export default function Products() {
   return (
-    <div className="relative box-container bg-gray-100 flex flex-col justify-center items-center">
-      <div className="w-full p-2 pb-20 flex flex-col items-center justify-center bg-[#2176F5]">
+    <section
+      id="products"
+      className="text-white relative box-container bg-gray-100 flex flex-col justify-center items-center"
+    >
+      <div className=" w-full p-2 pb-20 flex flex-col items-center justify-center bg-blue-500 ">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -40,9 +43,9 @@ export default function Products() {
           <p className="text-white font-bold text-lg md:text-3xl lg:text-5xl text-center m-2 ">
             PRODUCTS
           </p>
-          <p className="platform-description text-center text-white text-lg pb-10">
-            "Discover how our innovative products can streamline your workflow,
-            boost efficiency, and drive results."
+          <p className="text-sm md:text-lg lg:text-xl mb-6 leading-relaxed">
+            Discover how our innovative products can streamline your workflow,
+            boost efficiency, and drive results.
           </p>
         </motion.div>
       </div>
@@ -96,6 +99,6 @@ export default function Products() {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }

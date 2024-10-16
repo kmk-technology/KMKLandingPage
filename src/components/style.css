@@ -23,7 +23,7 @@
 }
 
 .platform-title {
-  @apply bg-[#002249] bg-clip-text text-transparent font-bold text-lg md:text-3xl lg:text-5xl text-center;
+  @apply bg-[#002249] bg-clip-text text-transparent font-bold text-4xl md:text-4xl lg:text-5xl text-center;
 }
 
 .platform-description {

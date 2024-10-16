@@ -101,6 +101,16 @@ const ClientsSection: React.FC<{
 
     if (scrollingContainerRef.current) {
       observer.observe(scrollingContainerRef.current);
+      const container = scrollingContainerRef.current;
+      const firstItem = container.children[0] as HTMLElement;
+      const containerWidth = container.offsetWidth;
+      const firstItemWidth = firstItem.offsetWidth;
+      const scrollTo =
+        firstItem.offsetLeft - containerWidth / 2 + firstItemWidth / 2;
+      container.scrollTo({
+        left: scrollTo,
+        behavior: "smooth",
+      });
     }
 
     return () => {
@@ -115,7 +125,6 @@ const ClientsSection: React.FC<{
       const item = scrollingContainerRef.current.children[index] as HTMLElement;
       const containerWidth = scrollingContainerRef.current.offsetWidth;
       const itemWidth = item.offsetWidth;
-
       const scrollTo = item.offsetLeft - containerWidth / 2 + itemWidth / 2;
       scrollingContainerRef.current.scrollTo({
         left: scrollTo,
@@ -125,7 +134,7 @@ const ClientsSection: React.FC<{
   };
 
   return (
-    <section className="py-5 w-full box-container flex flex-col justify-center items-center">
+    <div className=" py-5 w-full box-container flex flex-col justify-center items-center">
       <div
         ref={scrollingContainerRef}
         className="scrolling-container container"
@@ -147,7 +156,7 @@ const ClientsSection: React.FC<{
               initial={{ opacity: 0, y: 100 }}
               animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.5 }}
-              onClick={() => handleItemClick(index)} // Thêm handler click tại đây
+              onClick={() => handleItemClick(index)}
             >
               <div className="p-2 flex items-center justify-center rounded-xl shadow-lg hover:scale-105 transition-transform hover:shadow-xl h-32 w-32 bg-white">
                 <img
@@ -162,18 +171,20 @@ const ClientsSection: React.FC<{
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
 const CorporateClients: React.FC = () => {
   return (
-    <div className="pre-container bg-gray-100 flex flex-col justify-center items-center w-full">
-      <h2 className="platform-title font-bold m-2">CORPORATE CLIENTS</h2>
-      <ClientsSection items={CorporateItems} />
-      <h2 className="platform-title font-bold m-2">MEDICAL CLIENTS</h2>
-      <ClientsSection items={MedicalItems} />
-    </div>
+    <section id="clients">
+      <div className="pre-container bg-gray-100 flex flex-col justify-center items-center w-full">
+        <h2 className="platform-title font-bold m-2">CORPORATE CLIENTS</h2>
+        <ClientsSection items={CorporateItems} />
+        <h2 className="platform-title font-bold m-2">MEDICAL CLIENTS</h2>
+        <ClientsSection items={MedicalItems} />
+      </div>
+    </section>
   );
 };
 
