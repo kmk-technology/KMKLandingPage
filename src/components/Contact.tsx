@@ -23,8 +23,6 @@ const Contact = () => (
             </div>
           </div>
           <div className="text-gray-800 space-y-4 w-full">
-            {" "}
-            {/* Adjusted space-y for less gap */}
             <p className="font-bold text-2xl">CONTACT US</p>
             <ul className="space-y-4 font-roboto">
               <li className="flex flex-wrap items-center space-x-4">
@@ -42,40 +40,44 @@ const Contact = () => (
                   />
                 </svg>
                 <div className="space-y-2">
-                  <a
-                    href="#"
-                    rel="noopener noreferrer"
-                    className="hover:text-blue-700 transition mr-2"
-                  >
-                    kmk-tech.vn
-                  </a>
-                  <a
-                    href="https://medifam.vn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-blue-700 transition mr-2"
-                  >
-                    medifam.vn
-                  </a>
-                  <a
-                    href="https://yhgd.vn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-blue-700 transition mr-2"
-                  >
-                    yhgd.vn
-                  </a>
-                  <a
-                    href="https://kmksales.vn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-blue-700 transition mr-2"
-                  >
-                    kmksales.vn
-                  </a>
+                  <span className="flex flex-wrap items-center space-x-2">
+                    <a
+                      href="#"
+                      rel="noopener noreferrer"
+                      className="hover:text-blue-700 transition underline"
+                    >
+                      kmk-tech.vn
+                    </a>
+                    <span className="mx-1">|</span>
+                    <a
+                      href="https://medifam.vn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-blue-700 transition underline"
+                    >
+                      medifam.vn
+                    </a>
+                    <span className="mx-1">|</span>
+                    <a
+                      href="https://yhgd.vn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-blue-700 transition underline"
+                    >
+                      yhgd.vn
+                    </a>
+                    <span className="mx-1">|</span>
+                    <a
+                      href="https://kmksales.vn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-blue-700 transition underline"
+                    >
+                      kmksales.vn
+                    </a>
+                  </span>
                 </div>
               </li>
-              {/* Additional contact items remain unchanged */}
               <li className="flex items-center space-x-4">
                 <svg
                   className="w-6 h-6 text-gray-700"
