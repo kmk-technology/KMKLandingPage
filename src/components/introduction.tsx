@@ -23,12 +23,12 @@ const Introduction = () => {
             to achieve their full potential. We strive to continuously evolve
             and adapt to the ever-changing technological landscape.
           </p>
-          <a
+          {/* <a
             href="#learn-more"
             className="inline-block bg-white text-blue-500 font-semibold px-8 py-3 rounded-full hover:bg-blue-100 transition duration-300 transform hover:scale-105"
           >
             Learn More
-          </a>
+          </a> */}
         </motion.div>
         <div className="md:w-1/2 flex justify-center mt-12 md:mt-0">
           <img
@@ -69,12 +69,12 @@ const Introduction = () => {
             creativity, collaboration, and excellence, we aim to build lasting
             relationships and drive sustainable growth for all stakeholders.
           </p>
-          <a
+          {/* <a
             href="#learn-more"
             className="inline-block bg-white text-blue-500 font-semibold px-8 py-3 rounded-full hover:bg-blue-100 transition duration-300 transform hover:scale-105"
           >
             Learn More
-          </a>
+          </a> */}
         </motion.div>
       </div>
     </section>

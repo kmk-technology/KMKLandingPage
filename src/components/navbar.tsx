@@ -42,7 +42,7 @@ const Navbar = () => {
   let [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed top-4 left-1/3 md:left-1/2 transform -translate-x-1/2 z-50 w-full">
+    <div className="fixed top-2 left-1/3 md:left-1/2 transform -translate-x-1/2 z-50 w-full">
       <div className=" bg-white shadow-lg w-[40%] md:w-[60%] mx-auto rounded-full border border-white/20">
         <div className="flex items-center justify-between py-4 px-6">
           <div className="flex-1 md:flex hidden">
@@ -77,7 +77,7 @@ const Navbar = () => {
               {LinksRight.map((link) => (
                 <li
                   key={link.name}
-                  className={`md:ml-8 font-semibold ${
+                  className={`md:mr-8 font-semibold ${
                     activeSection === link.link.substring(1)
                       ? "font-bold text-[#2176F5]"
                       : "text-black"

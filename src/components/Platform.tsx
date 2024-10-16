@@ -58,15 +58,15 @@ function Platform() {
       id="platform"
       className="platform-container bg-cover bg-center bg-no-repeat bg-gradient-to-b to-blue-500 from-teal-500"
     >
-      <div className="platform-content">
+      <div className="platform-content container mx-auto px-6 md:px-12 lg:px-24 flex flex-col md:flex-row items-center justify-between">
         <motion.div
           initial={{ opacity: 0, x: "-70px" }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5 }}
-          className="flex-1 w-full flex flex-col items-center text-white justify-center p-4 mb-4 md:mb-0"
+          className="flex-1 w-full flex flex-col items-start text-white justify-center p-4 mb-4 md:mb-0"
         >
-          <p className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+          <p className=" text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             PLATFORM
           </p>
           <p className="text-sm md:text-lg lg:text-xl mb-6 leading-relaxed">
