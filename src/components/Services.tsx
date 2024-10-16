@@ -32,20 +32,23 @@ const data = [
 
 export default function Services() {
   return (
-    <div className="relative box-container flex flex-col justify-center items-center bg-[#2176F5]">
+    <section
+      id="services"
+      className="relative box-container flex flex-col justify-center items-center bg-cover bg-blue-500"
+    >
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.5 }}
-        className="p-10 flex flex-col items-center justify-center"
+        className="p-10 flex flex-col items-center justify-center text-white"
       >
-        <p className="text-white font-bold text-lg md:text-3xl lg:text-5xl text-center">
+        <p className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
           SERVICES
         </p>
-        <p className="text-center text-white text-lg">
-          "Our products are highly valued for their efficiency, particularly our
-          supportive services."
+        <p className="text-sm md:text-lg lg:text-xl mb-6 leading-relaxed">
+          Our products are highly valued for their efficiency, particularly our
+          supportive services.
         </p>
       </motion.div>
 
@@ -72,6 +75,6 @@ export default function Services() {
           </motion.div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

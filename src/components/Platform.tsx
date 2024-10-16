@@ -54,29 +54,26 @@ const platformItems = [
 
 function Platform() {
   return (
-    <div className="platform-container">
-      <motion.div
-        initial={{ opacity: 1, x: -100, y: -50 }}
-        whileInView={{ opacity: 1, x: 0, y: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 2 }}
-        className="rounded-shape"
-      ></motion.div>
-
+    <section
+      id="platform"
+      className="platform-container bg-cover bg-center bg-no-repeat bg-gradient-to-b to-blue-500 from-teal-500"
+    >
       <div className="platform-content">
         <motion.div
           initial={{ opacity: 0, x: "-70px" }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5 }}
-          className="flex-1 w-full flex flex-col items-center justify-center p-4 mb-4 md:mb-0"
+          className="flex-1 w-full flex flex-col items-center text-white justify-center p-4 mb-4 md:mb-0"
         >
-          <p className="platform-title">PLATFORM</p>
-          <p className="platform-description">
-            "Our platform is designed to empower businesses with innovative
+          <p className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            PLATFORM
+          </p>
+          <p className="text-sm md:text-lg lg:text-xl mb-6 leading-relaxed">
+            Our platform is designed to empower businesses with innovative
             solutions that enhance productivity and streamline operations. We
             strive to meet the diverse needs of our clients, fostering long-term
-            partnerships built on trust and mutual success."
+            partnerships built on trust and mutual success.
           </p>
         </motion.div>
 
@@ -90,7 +87,9 @@ function Platform() {
               transition={{ duration: 1, delay: index * 0.2 }}
             >
               <div className="w-full text-center mb-6">
-                <p className="platform-item-title">{platform.title}</p>
+                <p className="platform-item-title text-white">
+                  {platform.title}
+                </p>
                 <div className="platform-icon-container">
                   {platform.item.map((iconData, i) => (
                     <motion.div
@@ -119,7 +118,7 @@ function Platform() {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
