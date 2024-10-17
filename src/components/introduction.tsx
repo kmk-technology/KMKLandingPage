@@ -15,13 +15,26 @@ const Introduction = () => {
           className="md:w-1/2 text-white"
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Simplify Your Business <br /> Innovate for Excellence
+            Simplify Your Business <br />
+            <span className="text-3xl md:text-5xl">
+              Innovate for Excellence
+            </span>
           </h1>
-          <p className="text-sm md:text-lg lg:text-xl mb-6 leading-relaxed">
-            At KMK Technology, our vision is to be a leading provider of
-            innovative and reliable technology solutions that empower businesses
-            to achieve their full potential. We strive to continuously evolve
-            and adapt to the ever-changing technological landscape.
+          <p className="text-sm md:text-lg lg:text-2xl mb-6 leading-relaxed">
+            At{" "}
+            <span className="font-semibold cursor-pointer">
+              <span className="text-[#212ff5]">KMK</span>{" "}
+              <span className="text-[#00e566]">TECHNOLOGY</span>
+            </span>
+            , We simplify your business operations by streamlining processes and
+            reducing complexity, allowing you to focus on core activities.{" "}
+            <span className="font-semibold">
+              <span className="text-[#212ff5]">KMK</span>{" "}
+            </span>
+            innovates continuously to deliver cutting-edge solutions and exceed
+            industry standards. Through these efforts, we aim to provide
+            unparalleled value and foster lasting relationships with our
+            clients.
           </p>
           {/* <a
             href="#learn-more"
@@ -57,17 +70,18 @@ const Introduction = () => {
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Empowering Innovation
-            <br /> Ensuring Reliability
+            <br />
+            <span className="text-3xl md:text-5xl">Ensuring Reliability</span>
           </h1>
           <p className="text-sm md:text-lg lg:text-xl mb-6 leading-relaxed">
-            At KMK Technology, our vision is to be a leading provider of
-            innovative and reliable technology solutions that empower businesses
-            to achieve their full potential. We strive to continuously evolve
-            and adapt to the ever-changing technological landscape, ensuring
-            that our products and services not only meet but exceed the
-            expectations of our partners and clients. By fostering a culture of
-            creativity, collaboration, and excellence, we aim to build lasting
-            relationships and drive sustainable growth for all stakeholders.
+            Our vision is to be a leading provider of innovative and reliable
+            technology solutions that empower businesses to achieve their full
+            potential. We strive to continuously evolve and adapt to the
+            ever-changing technological landscape, ensuring that our products
+            and services not only meet but exceed the expectations of our
+            partners and clients. By fostering a culture of creativity,
+            collaboration, and excellence, we aim to build lasting relationships
+            and drive sustainable growth for all stakeholders.
           </p>
           {/* <a
             href="#learn-more"

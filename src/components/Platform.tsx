@@ -70,9 +70,13 @@ function Platform() {
             PLATFORM
           </p>
           <p className="text-sm md:text-lg lg:text-xl mb-6 leading-relaxed">
-            Our platform is designed to empower businesses with innovative
-            solutions that enhance productivity and streamline operations. We
-            strive to meet the diverse needs of our clients, fostering long-term
+            <span className="font-semibold cursor-pointer">
+              <span className="text-[#212ff5]">KMK</span>{" "}
+              <span className="text-[#00e566]">TECHNOLOGY</span>
+            </span>{" "}
+            platform is designed to empower businesses with innovative solutions
+            that enhance productivity and streamline operations. We strive to
+            meet the diverse needs of our clients, fostering long-term
             partnerships built on trust and mutual success.
           </p>
         </motion.div>

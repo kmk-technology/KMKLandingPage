@@ -1,9 +1,9 @@
 // App.jsx
-import Contact from "./components/Contact";
-import CorporateClients from "./components/CorporateClients";
-import Platform from "./components/Platform";
-import Products from "./components/Products";
-import Services from "./components/Services";
+import Contact from "./components/contact";
+import CorporateClients from "./components/corporateClients";
+import Platform from "./components/platform";
+import Products from "./components/products";
+import Services from "./components/services";
 import "./index.css";
 import "./App.css";
 import Navbar from "./components/navbar";

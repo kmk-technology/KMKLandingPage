@@ -143,7 +143,7 @@ const Contact = () => (
       <p>
         © {moment().format("YYYY")} - All rights reserved by{" "}
         <span className="font-semibold">
-          <span className="text-[#2176F5]">KMK</span>
+          <span className="text-[#2176F5]">KMK</span>{" "}
           <span className="text-[#00B14F]">TECHNOLOGY</span>
         </span>
       </p>
