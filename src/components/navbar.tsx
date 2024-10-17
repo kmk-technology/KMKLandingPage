@@ -39,19 +39,21 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-2 left-1/2 transform -translate-x-1/2 w-full md:w-3/4 lg:w-2/3 z-50">
+    <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full">
       <div
         className={`${
-          !open ? "bg-white" : "bg-transparent"
-        } shadow-lg mx-auto rounded-full w-full px-4 sm:px-6 lg:px-8`}
+          !open
+            ? "backdrop-blur-lg bg-white/25 rounded-full border border-white/20"
+            : " bg-transparent"
+        }  shadow-lg w-[90%] md:w-[60%] mx-auto `}
       >
         <div className="flex justify-between items-center">
-          <div className="flex-1 hidden md:flex items-center justify-end">
-            <ul className="flex space-x-8">
+          <div className=" md:flex hidden">
+            <ul className="flex items-center">
               {LinksLeft.map((link) => (
                 <li
                   key={link.name}
-                  className={`font-semibold text-sm sm:text-sm lg:text-base ${
+                  className={` md:ml-8 font-semibold text-sm sm:text-sm lg:text-base ${
                     activeSection === link.link.substring(1)
                       ? "font-bold text-[#2176F5]"
                       : "text-black"
@@ -63,7 +65,7 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <div className="flex justify-center items-center mx-5 lg:ml-auto lg:mr-0">
+          <div className="flex justify-center items-center duration-300 hover:scale-110">
             <a href="#">
               <img
                 className="w-20 h-auto"
@@ -74,12 +76,12 @@ const Navbar = () => {
           </div>
 
           {/* Right Links */}
-          <div className="flex-1 hidden md:flex items-center justify-start">
-            <ul className="flex space-x-8">
+          <div className="flex justify-between items-center">
+            <ul className=" md:flex hidden">
               {LinksRight.map((link) => (
                 <li
                   key={link.name}
-                  className={`font-semibold text-sm sm:text-sm lg:text-base ${
+                  className={`md:mr-8 font-semibold text-sm sm:text-sm lg:text-base ${
                     activeSection === link.link.substring(1)
                       ? "font-bold text-[#2176F5]"
                       : "text-black"
@@ -92,7 +94,7 @@ const Navbar = () => {
           </div>
 
           <div
-            className="md:hidden flex items-center cursor-pointer"
+            className="md:hidden flex items-center cursor-pointer p-6"
             onClick={() => setOpen(!open)}
           >
             {open ? (

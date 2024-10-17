@@ -4,9 +4,9 @@ const Introduction = () => {
   return (
     <section
       id="intro"
-      className="bg-gradient-to-b from-blue-500 to-teal-500 py-20"
+      className="bg-gradient-to-b from-blue-500 to-teal-500 py-20 "
     >
-      <div className="container mx-auto px-6 md:px-12 lg:px-24 flex flex-col md:flex-row items-center justify-between">
+      <div className="container mx-auto px-6 pt-10 md:pt-0 md:px-12 lg:px-24 flex flex-col md:flex-row items-center justify-between ">
         <motion.div
           initial={{ opacity: 0, x: "-70px" }}
           whileInView={{ opacity: 1, x: 0 }}

@@ -29,17 +29,17 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="kmk">
+    <section id="kmk" className="hidden md:block">
       <div
         ref={ref}
-        className="w-full h-screen overflow-hidden relative grid place-items-center z-10"
+        className="w-full md:h-screen overflow-hidden relative grid place-items-center z-10"
       >
         <motion.h1
           style={{ y: textY }}
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
           transition={{ duration: 1 }}
-          className="font-bold text-white text-7xl md:text-9xl relative z-10 mb-72"
+          className="font-bold text-white text-3xl md:text-9xl relative z-10 mb-72"
         >
           KMK TECHNOLOGY <span className="text-4xl ml-2 absolute">®</span>
         </motion.h1>
