@@ -1,14 +1,14 @@
 // App.jsx
-import Contact from "./components/contact.tsx";
-import CorporateClients from "./components/corporateClients.tsx";
-import Platform from "./components/platform.tsx";
-import Products from "./components/products.tsx";
-import Services from "./components/services.tsx";
+import Contact from "./components/contact";
+import CorporateClients from "./components/corporateClients";
+import Platform from "./components/platform";
+import Products from "./components/products";
+import Services from "./components/services";
 import "./index.css";
 import "./App.css";
-import Navbar from "./components/navbar.tsx";
-import Hero from "./components/hero.tsx";
-import Introduction from "./components/introduction.tsx";
+import Navbar from "./components/navbar";
+import Hero from "./components/hero";
+import Introduction from "./components/introduction";
 
 function App() {
   return (
