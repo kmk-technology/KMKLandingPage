@@ -62,6 +62,7 @@ export default function AnalysisMedical() {
           </h2>
           <p
             style={{ margin: "10px 0", textAlign: "justify", fontSize: "1em" }}
+            className="text-base"
           >
             Khi đăng ký sử dụng tài khoản trên Ứng dụng, bạn cần cung cấp các
             thông tin cá nhân chính xác, đầy đủ và mới nhất. Sau khi đăng ký,
