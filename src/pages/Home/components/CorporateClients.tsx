@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 
-import "../App.css";
+import "../../../App.css";
 import "./style.css";
 
 const CorporateItems = [

@@ -3,15 +3,15 @@ import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/24/solid";
 
 const Navbar = () => {
   const LinksLeft = [
-    { name: "INTRODUCE", link: "#kmk" },
-    { name: "FLATFORM", link: "#platform" },
-    { name: "SERVICES", link: "#services" },
+    { name: "INTRODUCE", link: "/#kmk" },
+    { name: "FLATFORM", link: "/#platform" },
+    { name: "SERVICES", link: "/#services" },
   ];
 
   const LinksRight = [
-    { name: "PRODUCT", link: "#products" },
-    { name: "CLIENTS", link: "#clients" },
-    { name: "CONTACT", link: "#contact" },
+    { name: "PRODUCT", link: "/#products" },
+    { name: "CLIENTS", link: "/#clients" },
+    { name: "CONTACT", link: "/#contact" },
   ];
 
   const [activeSection, setActiveSection] = useState("");
@@ -66,7 +66,7 @@ const Navbar = () => {
           </div>
 
           <div className="flex justify-center items-center duration-300 hover:scale-110">
-            <a href="#">
+            <a href="/#">
               <img
                 className="w-20 h-auto"
                 src="/logo/kmk/logo-nbg.png"

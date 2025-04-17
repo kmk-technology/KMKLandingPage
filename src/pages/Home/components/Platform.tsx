@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import "../styles/shiny.css";
-import "../App.css";
+import "../../../styles/shiny.css";
+import "../../../App.css";
 import "./style.css";
 
 const platformItems = [

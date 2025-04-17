@@ -3,7 +3,7 @@ import CodeIcon from "@mui/icons-material/Code";
 import CloudIcon from "@mui/icons-material/Cloud";
 import PublicIcon from "@mui/icons-material/Public";
 import { SvgIconComponent } from "@mui/icons-material";
-import "../App.css";
+import "../../../App.css";
 import "./style.css";
 import { motion } from "framer-motion";
 

@@ -1,5 +1,5 @@
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import "../App.css";
+import "../../../App.css";
 import "./style.css";
 import { motion } from "framer-motion";
 
