@@ -56,7 +56,7 @@ const ClientsSection: React.FC<{
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+  // const [isVisible, setIsVisible] = useState(false);
 
   const handleStart = useCallback((e: React.MouseEvent | React.TouchEvent) => {
     setIsDown(true);
@@ -92,7 +92,7 @@ const ClientsSection: React.FC<{
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setIsVisible(true);
+            // setIsVisible(true);
           }
         });
       },
