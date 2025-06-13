@@ -11,11 +11,10 @@ export default function AnalysisMedical() {
         </p>
         <p className="text-justify mb-3">
           Với việc sử dụng các thông tin, dịch vụ trên Ứng dụng{" "}
-          <strong>Y dược 115 Cần Giuộc Point</strong> (sau đây được gọi là Ứng
-          dụng), đồng nghĩa với việc bạn đã chấp nhận hoàn toàn các quy định sử
-          dụng dưới đây. Mời bạn vui lòng đọc kỹ các quy định sử dụng dưới đây
-          trước khi quyết định sử dụng thông tin, dịch vụ, sản phẩm của chúng
-          tôi.
+          <strong>MedCG: Tích điểm</strong> (sau đây được gọi là Ứng dụng), đồng
+          nghĩa với việc bạn đã chấp nhận hoàn toàn các quy định sử dụng dưới
+          đây. Mời bạn vui lòng đọc kỹ các quy định sử dụng dưới đây trước khi
+          quyết định sử dụng thông tin, dịch vụ, sản phẩm của chúng tôi.
         </p>
 
         <p className="lg:text-3xl text-lg font-bold mb-5">
@@ -274,7 +273,7 @@ export default function AnalysisMedical() {
         </p>
         <p className="text-justify mb-3">
           Tất cả quyền sở hữu trí tuệ tồn tại trong Ứng dụng{" "}
-          <strong>Y dược 115 Cần Giuộc Point</strong> đều thuộc về công ty
+          <strong>MedCG: Tích điểm</strong> đều thuộc về công ty
           <strong> TNHH KMK-Technology Việt Nam</strong>. Theo đó, tất cả các
           quyền hợp pháp đều được đảm bảo. Trừ phi được sự đồng ý của Ứng dụng,
           bạn không được phép tải lên, gửi, xuất bản, tái sản xuất, truyền hoặc

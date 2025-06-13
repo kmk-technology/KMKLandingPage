@@ -11,28 +11,28 @@ export default function AnalysisMedical() {
           Chính sách bảo mật thông tin
         </p>
         <p className="text-justify mb-3">
-          Ứng dụng <strong>Y dược 115 Cần Giuộc Point</strong> tôn trọng những
-          thông tin cá nhân của bạn. Chúng tôi hiểu rằng bạn cần biết chúng tôi
-          quản lý những thông tin cá nhân tập hợp được từ ứng dụng như thế nào.
-          Hãy đọc và tìm hiểu về những quy định bảo mật thông tin sau đây.
+          Ứng dụng <strong>MedCG: Tích điểm</strong> tôn trọng những thông tin
+          cá nhân của bạn. Chúng tôi hiểu rằng bạn cần biết chúng tôi quản lý
+          những thông tin cá nhân tập hợp được từ ứng dụng như thế nào. Hãy đọc
+          và tìm hiểu về những quy định bảo mật thông tin sau đây.
         </p>
         <p className="text-justify  mb-3">
           Việc bạn truy cập, đăng ký tài khoản, sử dụng Ứng dụng{" "}
-          <strong>Y dược 115 Cần Giuộc Point</strong> có nghĩa rằng bạn đồng ý
-          và chấp nhận ràng buộc bởi tất cả các điều khoản của bản quy định bảo
-          mật của chúng tôi.
+          <strong>MedCG: Tích điểm</strong> có nghĩa rằng bạn đồng ý và chấp
+          nhận ràng buộc bởi tất cả các điều khoản của bản quy định bảo mật của
+          chúng tôi.
         </p>
 
         <p className="lg:text-3xl text-lg font-bold mb-5">Tập hợp thông tin</p>
         <p className="text-justify  mb-3">
           <strong>Thông tin cá nhân:</strong> Ứng dụng{" "}
-          <strong>Y dược 115 Cần Giuộc Point</strong> chỉ yêu cầu các thông tin
-          cá nhân của bạn như: tên, email, số điện thoại, địa chỉ,… và một số
-          thông tin không bắt buộc khác khi bạn muốn tương tác với một số nội
-          dung trên website, ứng dụng. Các thông tin cá nhân này được sử dụng để
-          Ứng dụng <strong>Y dược 115 Cần Giuộc Point</strong> và các nền tảng
-          liên quan nhận diện, liên hệ với bạn khi cần cũng như tối ưu hóa các
-          tính năng dựa trên các thông tin đó.
+          <strong>MedCG: Tích điểm</strong> chỉ yêu cầu các thông tin cá nhân
+          của bạn như: tên, email, số điện thoại, địa chỉ,… và một số thông tin
+          không bắt buộc khác khi bạn muốn tương tác với một số nội dung trên
+          website, ứng dụng. Các thông tin cá nhân này được sử dụng để Ứng dụng{" "}
+          <strong>MedCG: Tích điểm</strong> và các nền tảng liên quan nhận diện,
+          liên hệ với bạn khi cần cũng như tối ưu hóa các tính năng dựa trên các
+          thông tin đó.
         </p>
         <p className="text-justify  mb-3">
           <strong>Lịch sử tìm kiếm:</strong> Ứng dụng sẽ lưu trữ lịch sử tìm
@@ -55,8 +55,8 @@ export default function AnalysisMedical() {
           Thông tin cá nhân của bạn sẽ không bị chia sẻ với bất kỳ bên thứ ba
           nào khi chưa có sự đồng ý của bạn. Chúng tôi có thể chia sẻ thông tin
           cho bên đối tác khi bạn đồng ý. Trong trường hợp có yêu cầu của pháp
-          luật, ứng dụng <strong>Y dược 115 Cần Giuộc Point</strong> có trách
-          nhiệm hợp tác cung cấp thông tin khách hàng.
+          luật, ứng dụng <strong>MedCG: Tích điểm</strong> có trách nhiệm hợp
+          tác cung cấp thông tin khách hàng.
         </p>
         <p className="text-justify  mb-3">
           Dữ liệu khách hàng của ứng dụng có thể được chuyển nhượng cho người kế
@@ -68,21 +68,21 @@ export default function AnalysisMedical() {
           Bảo đảm an toàn đối với các thông tin thu thập được
         </p>
         <p className="text-justify  mb-3">
-          Ứng dụng <strong>Y dược 115 Cần Giuộc Point</strong> chỉ tập hợp lại
-          các thông tin cá nhân trong phạm vi phù hợp và cần thiết cho mục đích
-          phục vụ đúng đắn của chúng tôi. Và chúng tôi duy trì các biện pháp
-          thích hợp nhằm bảo đảm tính an toàn, nguyên vẹn, độ chính xác, và tính
-          bảo mật những thông tin mà bạn đã cung cấp. Ngoài ra, chúng tôi cũng
-          có những biện pháp thích hợp để đảm bảo rằng bên thứ ba cũng sử dụng
-          các biện pháp bảo đảm an toàn cho các thông tin mà chúng tôi cung cấp
-          cho họ nếu có.
+          Ứng dụng <strong>MedCG: Tích điểm</strong> chỉ tập hợp lại các thông
+          tin cá nhân trong phạm vi phù hợp và cần thiết cho mục đích phục vụ
+          đúng đắn của chúng tôi. Và chúng tôi duy trì các biện pháp thích hợp
+          nhằm bảo đảm tính an toàn, nguyên vẹn, độ chính xác, và tính bảo mật
+          những thông tin mà bạn đã cung cấp. Ngoài ra, chúng tôi cũng có những
+          biện pháp thích hợp để đảm bảo rằng bên thứ ba cũng sử dụng các biện
+          pháp bảo đảm an toàn cho các thông tin mà chúng tôi cung cấp cho họ
+          nếu có.
         </p>
         <p className="text-justify  mb-3">
           Trong trường hợp máy chủ lưu trữ thông tin bị hacker tấn công dẫn đến
           mất mát dữ liệu cá nhân thành viên, ứng dụng{" "}
-          <strong>Y dược 115 Cần Giuộc Point</strong> sẽ có trách nhiệm thông
-          báo vụ việc cho cơ quan chức năng điều tra xử lý kịp thời và thông báo
-          cho thành viên được biết.
+          <strong>MedCG: Tích điểm</strong> sẽ có trách nhiệm thông báo vụ việc
+          cho cơ quan chức năng điều tra xử lý kịp thời và thông báo cho thành
+          viên được biết.
         </p>
 
         <p className="lg:text-3xl text-lg font-bold mb-5">Cookies</p>
@@ -97,12 +97,12 @@ export default function AnalysisMedical() {
         <p className="text-justify  mb-3">
           Trong website/ứng dụng của chúng tôi có thể đặt quảng cáo của cá nhân,
           đơn vị khác, những quảng cáo này có thể thu thập cookies của bạn và
-          ứng dụng <strong>Y dược 115 Cần Giuộc Point</strong> không thể truy
-          cập vào thông tin này. Bất kể lúc nào bạn truy cập vào website/ứng
-          dụng, hầu hết các trình duyệt đặt chế độ cookies tự động nhận. Nếu bạn
-          muốn làm mất hiệu lực cookies, có thể cài đặt cookies trong trình
-          duyệt, tuy nhiên chúng tôi có những thiết lập sẵn những ứng dụng vô
-          hiệu hóa thẻ cài đặt cookies.
+          ứng dụng <strong>MedCG: Tích điểm</strong> không thể truy cập vào
+          thông tin này. Bất kể lúc nào bạn truy cập vào website/ứng dụng, hầu
+          hết các trình duyệt đặt chế độ cookies tự động nhận. Nếu bạn muốn làm
+          mất hiệu lực cookies, có thể cài đặt cookies trong trình duyệt, tuy
+          nhiên chúng tôi có những thiết lập sẵn những ứng dụng vô hiệu hóa thẻ
+          cài đặt cookies.
         </p>
 
         <p className="lg:text-3xl text-lg font-bold mb-5">
@@ -110,11 +110,10 @@ export default function AnalysisMedical() {
         </p>
         <p className="text-justify  mb-3">
           Nếu bạn nhấn đường liên kết sang website/ứng dụng thứ ba, bao gồm cả
-          trang quảng cáo, bạn sẽ rời ứng dụng{" "}
-          <strong>Y dược 115 Cần Giuộc Point</strong> và sẽ đến website bạn đã
-          chọn. Chúng tôi không thể kiểm soát các hoạt động của bên thứ ba và
-          không chịu trách nhiệm về sự an toàn hay bất kể những nội dung gì có
-          trong website/ứng dụng đó.
+          trang quảng cáo, bạn sẽ rời ứng dụng <strong>MedCG: Tích điểm</strong>{" "}
+          và sẽ đến website bạn đã chọn. Chúng tôi không thể kiểm soát các hoạt
+          động của bên thứ ba và không chịu trách nhiệm về sự an toàn hay bất kể
+          những nội dung gì có trong website/ứng dụng đó.
         </p>
 
         <p className="lg:text-3xl text-lg font-bold mb-5">
@@ -138,9 +137,8 @@ export default function AnalysisMedical() {
           định bảo mật của chúng tôi. Thêm vào đó chúng tôi sẽ thông báo cho bạn
           bằng email khi có những thay đổi quan trọng về cách sử dụng liên quan
           các thông tin cá nhân của bạn. Trong trường hợp bạn từ chối các điều
-          khoản thay đổi có trong ứng dụng{" "}
-          <strong>Y dược 115 Cần Giuộc Point</strong>, xin liên hệ chúng tôi
-          theo địa chỉ email{" "}
+          khoản thay đổi có trong ứng dụng <strong>MedCG: Tích điểm</strong>,
+          xin liên hệ chúng tôi theo địa chỉ email{" "}
           <a
             href="mailto:dev@kmk-tech.vn"
             className="text-blue-600 hover:underline"
