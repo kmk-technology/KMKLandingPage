@@ -1,0 +1,24 @@
+/* KMK Technology design tokens - light theme derived from the hexagonal KMK mark
+   (gradient #457ae7 → #457ae7) and the wordmark blue #457ae7. */
+:root {
+  --canvas: #ffffff;
+  --mist: #f5f5f7;
+  --cloud: #eef3fd;
+  --ink: #1c1c1e;
+  --muted: #6e6e73;
+  --subtle: #737378;
+  --line: rgb(11 18 32 / 0.08);
+  --line-strong: rgb(11 18 32 / 0.14);
+
+  --brand: #457ae7;
+  --brand-deep: #3a6bd6;
+  --brand-violet: #457ae7;
+  --brand-tint: #ecf1fc;
+  --signal: #457ae7;
+
+  --gutter: clamp(1rem, 0.55rem + 2.2vw, 2.5rem);
+  --section-y: clamp(4.5rem, 3rem + 5.5vw, 8.5rem);
+  --header-h: 76px;
+
+  color-scheme: light;
+}

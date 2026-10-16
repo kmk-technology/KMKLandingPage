@@ -1,3 +1,674 @@
+@import "./styles/tokens.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 8px);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+    overflow-x: clip;
+    font-optical-sizing: auto;
+  }
+
+  body.is-locked {
+    overflow: hidden;
+  }
+
+  /* while the preloader runs nothing scrolls (set in index.html before any script) */
+  html.is-loading,
+  html.is-loading body {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  ::selection {
+    background: var(--brand);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    font-weight: 500;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell;
+    padding-inline: var(--gutter);
+  }
+
+  .section {
+    padding-block: var(--section-y);
+  }
+
+  /* Small pill label above section titles */
+  .kicker {
+    @apply inline-flex items-center gap-2 text-[0.8125rem] font-medium text-muted;
+  }
+
+  .card {
+    @apply rounded-[1.75rem] border border-line bg-canvas shadow-card;
+  }
+
+  .dot-grid {
+    background-image: radial-gradient(
+      rgb(11 18 32 / 0.09) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+  }
+
+  /* Word masks used by RevealText */
+  .rt-mask {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    /* room for stacked Vietnamese diacritics above (ệ, ầ, ổ), descenders below, and glyph
+       overhang left/right (tight tracking pushes the last letter past its box) */
+    padding: 0.28em 0.12em 0.16em;
+    margin: -0.28em -0.12em -0.16em;
+  }
+  .rt-word {
+    display: inline-block;
+    will-change: transform;
+  }
+
+  /* Hero ecosystem: dashes travel along the connectors */
+  .eco-line {
+    animation: eco-dash 1.6s linear infinite;
+  }
+  @keyframes eco-dash {
+    to {
+      stroke-dashoffset: -6.4;
+    }
+  }
+
+  /* ---------- Liquid glass ----------
+     Frosted, saturated backdrop + specular rim + inner light edges.
+     Needs colour behind it (see <Ambient />) to read as glass. */
+  .glass {
+    position: relative;
+    isolation: isolate;
+    background: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.6),
+      rgb(255 255 255 / 0.25)
+    );
+    -webkit-backdrop-filter: blur(16px) saturate(170%);
+    backdrop-filter: blur(16px) saturate(170%);
+    box-shadow:
+      inset 0 1px 1px rgb(255 255 255 / 0.95),
+      inset 0 -1px 1px rgb(255 255 255 / 0.35),
+      0 12px 40px -14px rgb(0 0 0 / 0.25),
+      0 2px 6px -2px rgb(0 0 0 / 0.08);
+  }
+  .glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    background: linear-gradient(
+      140deg,
+      rgb(255 255 255 / 0.95),
+      rgb(255 255 255 / 0.15) 38%,
+      rgb(255 255 255 / 0.1) 62%,
+      rgb(255 255 255 / 0.7)
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  /* Same look without a live backdrop blur - for small, numerous or moving elements. */
+  .glass-lite {
+    position: relative;
+    isolation: isolate;
+    background: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.92),
+      rgb(255 255 255 / 0.7)
+    );
+    box-shadow:
+      inset 0 1px 1px rgb(255 255 255 / 1),
+      inset 0 -1px 1px rgb(255 255 255 / 0.5),
+      0 0 0 1px rgb(255 255 255 / 0.8),
+      0 10px 30px -14px rgb(0 0 0 / 0.3);
+  }
+  .glass-lite.glass-tint {
+    background: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.26),
+      rgb(255 255 255 / 0.1)
+    );
+    box-shadow:
+      inset 0 1px 1px rgb(255 255 255 / 0.6),
+      inset 0 0 0 1px rgb(255 255 255 / 0.28),
+      0 10px 30px -16px rgb(0 0 0 / 0.25);
+  }
+
+  /* Orbit: children counter-rotate so labels stay upright */
+  @keyframes orbit {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes orbit-rev {
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+
+  /* Soft specular sheen that slides across on hover */
+  .glass-sheen {
+    overflow: hidden;
+  }
+  .glass-sheen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      115deg,
+      transparent 30%,
+      rgb(255 255 255 / 0.55) 48%,
+      transparent 66%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .glass-sheen:hover::after {
+    transform: translateX(120%);
+  }
+  .glass-strong {
+    background: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.82),
+      rgb(255 255 255 / 0.55)
+    );
+  }
+  .glass-tint {
+    background: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.28),
+      rgb(255 255 255 / 0.08)
+    );
+  }
+
+  @keyframes drift-a {
+    to {
+      transform: translate3d(8%, 10%, 0) scale(1.12);
+    }
+  }
+  @keyframes drift-b {
+    to {
+      transform: translate3d(-10%, -6%, 0) scale(0.92);
+    }
+  }
+
+  /* Moving tracks/rings get their own compositor layer (no repaint while they move). */
+  .marquee-track,
+  .animate-floaty,
+  [style*="orbit"] {
+    will-change: transform;
+  }
+
+  @keyframes gradientShift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .marquee-track:hover,
+  .marquee-track:focus-within {
+    animation-play-state: paused;
+  }
+
+  .legal-prose {
+    @apply text-[1.0625rem] leading-[1.75] text-muted;
+  }
+  .legal-prose > p {
+    @apply mb-4 text-left;
+  }
+  .legal-prose h2 {
+    @apply mb-4 mt-14 font-display text-[clamp(1.375rem,1.1rem+0.9vw,1.75rem)] font-semibold leading-tight text-ink;
+  }
+  .legal-prose ul {
+    @apply mb-4;
+  }
+  .legal-prose strong {
+    @apply font-semibold text-ink;
+  }
+  .legal-prose a {
+    @apply text-brand-deep underline decoration-1 underline-offset-4;
+  }
+}
+
+/* ---------- Cards ----------
+   Plain white surfaces with a hairline border and a soft shadow. */
+@layer components {
+  .card {
+    background: #fff;
+    border: 1px solid rgb(15 23 42 / 0.08);
+    box-shadow:
+      0 1px 2px rgb(15 23 42 / 0.04),
+      0 24px 48px -32px rgb(15 23 42 / 0.22);
+  }
+  .card-hover {
+    transition:
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.3s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-6px);
+    border-color: rgb(69 122 231 / 0.25);
+    box-shadow:
+      0 1px 2px rgb(15 23 42 / 0.04),
+      0 40px 70px -36px rgb(0 0 0 / 0.38);
+  }
+  .chip-soft {
+    background: #f2f5fa;
+  }
+}
+
+/* ---------- Cursor, grain, kinetic type ---------- */
+@layer components {
+  .has-cursor,
+  .has-cursor a,
+  .has-cursor button,
+  .has-cursor label {
+    cursor: none;
+  }
+  .cursor-dot {
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+    border-radius: 9999px;
+    background: #1c1c1e;
+    transition:
+      opacity 0.25s,
+      transform 0.25s;
+  }
+  .cursor-dot[data-state="hidden"] {
+    opacity: 0 !important;
+  }
+  .cursor-ring-body {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    transform: translate(-50%, -50%);
+    border-radius: 9999px;
+    border: 1px solid rgb(28 28 30 / 0.35);
+    font-size: 0;
+    font-weight: 600;
+    color: #fff;
+    transition:
+      width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.3s,
+      border-color 0.3s,
+      opacity 0.3s;
+  }
+  .cursor-ring[data-state="link"] .cursor-ring-body {
+    width: 64px;
+    height: 64px;
+    border-color: rgb(58 107 214 / 0.6);
+    background: rgb(69 122 231 / 0.08);
+  }
+  .cursor-ring[data-state="label"] .cursor-ring-body {
+    width: 96px;
+    height: 96px;
+    border-color: transparent;
+    background: #457ae7;
+    font-size: 0.8125rem;
+  }
+  .cursor-ring[data-state="hidden"] .cursor-ring-body {
+    opacity: 0;
+  }
+
+  /* Film grain over everything - keeps large flat areas from looking digital-flat. */
+  .grain {
+    position: fixed;
+    inset: -50%;
+    z-index: 80;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Hairline layout grid behind light sections */
+  .grid-lines {
+    background-image:
+      linear-gradient(rgb(15 23 42 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(15 23 42 / 0.05) 1px, transparent 1px);
+    background-size: 88px 88px;
+  }
+
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgb(28 28 30 / 0.85);
+  }
+}
+
+/* ---------- Service illustrations (looping UI mocks) ---------- */
+@layer components {
+  @keyframes mock-type {
+    0%,
+    4% {
+      clip-path: inset(0 100% 0 0);
+    }
+    16%,
+    88% {
+      clip-path: inset(0 0 0 0);
+    }
+    100% {
+      clip-path: inset(0 100% 0 0);
+    }
+  }
+  .mock-type {
+    animation: mock-type 9s steps(24) infinite;
+  }
+  @keyframes mock-bar {
+    from {
+      transform: scaleX(0.35);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  .mock-bar {
+    transform-origin: left;
+    animation: mock-bar 2.6s cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
+  }
+  @keyframes mock-move {
+    0%,
+    22% {
+      transform: translateX(0);
+    }
+    33%,
+    55% {
+      transform: translateX(calc(100% + 0.75rem));
+    }
+    66%,
+    92% {
+      transform: translateX(calc(200% + 1.5rem));
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 0;
+    }
+  }
+  .mock-move {
+    animation: mock-move 7s cubic-bezier(0.7, 0, 0.3, 1) infinite;
+  }
+  @keyframes mock-flow {
+    to {
+      stroke-dashoffset: -24;
+    }
+  }
+  .mock-flow {
+    stroke-dasharray: 4 8;
+    animation: mock-flow 1.2s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mock-type,
+    .mock-bar,
+    .mock-move,
+    .mock-flow {
+      animation: none;
+    }
+  }
+}
+
+/* ---------- Section sheets: each section slides over the previous one ---------- */
+@layer components {
+  .sheet {
+    position: relative;
+    margin-top: -2.5rem;
+    border-top-left-radius: 2.5rem;
+    border-top-right-radius: 2.5rem;
+    box-shadow: 0 -30px 60px -44px rgb(0 0 0 / 0.35);
+  }
+}
+
+/* ---------- Liquid glass (iOS style) ----------
+   Nearly clear: the page shows through, bent at the edges (SVG refraction in Chromium, see
+   LiquidGlass.tsx). Thickness comes from inner light/shadow, a rim that brightens toward
+   the light (--lg-angle follows the pointer) and a specular highlight (--lg-x/--lg-y). */
+@layer components {
+  .liquid-glass {
+    position: relative;
+    isolation: isolate;
+    /* the header contracts by clipping (no layout per frame); --ix comes from the bar */
+    clip-path: inset(0 var(--ix, 0px) round 999px);
+    --lg-angle: 135deg;
+    --lg-x: 22%;
+    --lg-y: -40%;
+    transition:
+      background-color 0.5s ease,
+      box-shadow 0.5s ease;
+  }
+  .liquid-glass.is-active {
+    /* centre a touch denser for legibility, edges clear so the refraction shows */
+    background: radial-gradient(
+      120% 140% at 50% 50%,
+      rgb(255 255 255 / 0.42),
+      rgb(255 255 255 / 0.14) 70%,
+      rgb(255 255 255 / 0.04)
+    );
+    -webkit-backdrop-filter: blur(1.5px) saturate(140%) brightness(1.04);
+    backdrop-filter: blur(1.5px) saturate(140%) brightness(1.04);
+    box-shadow:
+      inset 0 0 0 0.5px rgb(255 255 255 / 0.5),
+      inset 1.5px 2px 1px -1px rgb(255 255 255 / 0.95),
+      inset -1.5px -2px 1px -1px rgb(255 255 255 / 0.55),
+      inset 0 -10px 18px -14px rgb(69 122 231 / 0.35),
+      inset 0 10px 18px -12px rgb(255 255 255 / 0.55);
+  }
+  /* rim light: brightest on the side facing the light */
+  .liquid-glass.is-active::before {
+    content: "";
+    position: absolute;
+    inset: 0 var(--ix, 0px);
+    z-index: -1;
+    border-radius: inherit;
+    padding: 1.2px;
+    pointer-events: none;
+    background: linear-gradient(
+      var(--lg-angle),
+      rgb(255 255 255 / 1),
+      rgb(255 255 255 / 0.2) 28%,
+      rgb(255 255 255 / 0) 50%,
+      rgb(255 255 255 / 0.25) 72%,
+      rgb(255 255 255 / 0.85)
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  /* specular highlight that slides toward the light */
+  .liquid-glass.is-active::after {
+    content: "";
+    position: absolute;
+    inset: 0 var(--ix, 0px);
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(
+      60% 120% at var(--lg-x) var(--lg-y),
+      rgb(255 255 255 / 0.6),
+      rgb(255 255 255 / 0) 60%
+    );
+    mix-blend-mode: screen;
+    transition: background-position 0.3s;
+  }
+
+  /* drop shadow of the capsule (outside the clip, so it lives on its own layer) */
+  .lg-shadow {
+    box-shadow:
+      0 0 0 0.5px rgb(0 0 0 / 0.06),
+      0 6px 16px -6px rgb(20 40 90 / 0.18),
+      0 22px 44px -22px rgb(20 40 90 / 0.3);
+  }
+
+  /* selection "droplet" inside the bar: a small tinted glass lens */
+  .lg-drop {
+    background: linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.75),
+      rgb(236 241 252 / 0.55)
+    );
+    box-shadow:
+      inset 0 0 0 0.5px rgb(255 255 255 / 0.9),
+      inset 1px 1.5px 1px -0.5px rgb(255 255 255 / 1),
+      inset 0 -6px 10px -8px rgb(69 122 231 / 0.45),
+      0 0 0 0.5px rgb(69 122 231 / 0.18),
+      0 6px 14px -6px rgb(69 122 231 / 0.45);
+  }
+}
+
+/* Back-to-top: a small glass button */
+@layer components {
+  .btt {
+    background: radial-gradient(
+      circle at 30% 25%,
+      rgb(255 255 255 / 0.9),
+      rgb(255 255 255 / 0.55)
+    );
+    -webkit-backdrop-filter: blur(10px) saturate(160%);
+    backdrop-filter: blur(10px) saturate(160%);
+    box-shadow:
+      inset 0 1px 0.5px rgb(255 255 255 / 1),
+      inset 0 -4px 8px -6px rgb(69 122 231 / 0.4),
+      0 0 0 0.5px rgb(0 0 0 / 0.06),
+      0 12px 28px -12px rgb(20 40 90 / 0.35);
+  }
+}
+
+/* ---------- Story deck: the page does not scroll, the deck moves ---------- */
+html.deck,
+html.deck body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+.slide-scroll {
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+.slide-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Spotlight card: a soft glow and border light follow the pointer (--mx/--my set in JS) */
+@layer components {
+  .spot {
+    position: relative;
+    isolation: isolate;
+  }
+  .spot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.4s;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 50%),
+      rgb(69 122 231 / 0.14),
+      transparent 60%
+    );
+  }
+  .spot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+    background: radial-gradient(
+      260px circle at var(--mx, 50%) var(--my, 50%),
+      rgb(69 122 231 / 0.7),
+      transparent 70%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  .spot:hover::before,
+  .spot:hover::after {
+    opacity: 1;
+  }
+}
+
+/* preloader: the status line swaps in */
+@keyframes pl-swap {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
