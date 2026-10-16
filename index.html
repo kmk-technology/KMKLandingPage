@@ -1,17 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-      rel="stylesheet"
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
+    <title>KMK Technology</title>
+    <meta
+      name="description"
+      content="KMK Technology - phát triển phần mềm, tư vấn ERP (Oracle EBS, SAP), cloud &amp; hạ tầng CNTT, IT outsourcing. Custom software, ERP consulting, IT infrastructure and IT outsourcing in Ho Chi Minh City."
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="canonical" href="https://kmk-tech.vn/" />
     <link rel="icon" type="image/png" href="/logo/kmk/logo-nbg.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KMK Technology - Simply your business</title>
+    <link rel="apple-touch-icon" href="/logo/kmk/square-logo.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:site_name" content="KMK Technology" />
+    <meta
+      property="og:title"
+      content="KMK Technology - Simplify your business"
+    />
+    <meta
+      property="og:description"
+      content="Software development, ERP consulting, IT infrastructure and IT outsourcing - plus our own products MEDIFAM, KMK Sales and KMK WMS."
+    />
+    <meta property="og:url" content="https://kmk-tech.vn/" />
+    <meta
+      property="og:image"
+      content="https://kmk-tech.vn/logo/kmk/square-logo-wbg.png"
+    />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..700&display=swap"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "KMK Technology",
+        "slogan": "Simplify your business",
+        "url": "https://kmk-tech.vn/",
+        "logo": "https://kmk-tech.vn/logo/kmk/square-logo-wbg.png",
+        "email": "trung.ht@kmk-tech.vn",
+        "telephone": "+84938220711",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "99 Street No. 24A",
+          "addressLocality": "Binh Tan District, Ho Chi Minh City",
+          "addressCountry": "VN"
+        },
+        "sameAs": ["https://medifam.vn/", "https://kmksales.vn/"]
+      }
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- boot screen: the first frame of the loader, painted before the scripts arrive; React replaces it -->
+      <div
+        aria-hidden="true"
+        style="
+          position: fixed;
+          inset: 0;
+          z-index: 100;
+          display: grid;
+          place-items: center;
+          background: #f4f7fd;
+          font-family: &quot;Google Sans Flex&quot;, system-ui, sans-serif;
+        "
+      ></div>
+      <script>
+        document.documentElement.dataset.boot = "1";
+        document.documentElement.classList.add("is-loading");
+        // a reload always starts at the top (the story and its 3D mark begin there);
+        // links to a section (/#id) still land on that section
+        if ("scrollRestoration" in history)
+          history.scrollRestoration = "manual";
+        if (!location.hash) window.scrollTo(0, 0);
+      </script>
+    </div>
+    <noscript>
+      <p
+        style="
+          padding: 24px;
+          font-family: system-ui;
+          color: #0b1220;
+          background: #ffffff;
+        "
+      >
+        KMK Technology - Simplify your business. Contact: trung.ht@kmk-tech.vn ·
+        0938 220 711
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
     <!-- Google tag (gtag.js) -->
     <script
