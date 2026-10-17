@@ -15,7 +15,14 @@ export function markReady() {
  */
 export type MarkRect = { x: number; y: number; w: number; h: number };
 /** rect: where the mark's face is on screen · show: reveal the 3D mark (hidden until the logo lands) */
-export type MarkStage = { rect: () => MarkRect; show: () => void };
+export type MarkStage = {
+  rect: () => MarkRect;
+  show: () => void;
+  /** begin the 3D entrance from this screen rectangle (the loader logo) */
+  startAt: (r: MarkRect) => void;
+  /** entrance progress 0 … 1 */
+  morph: (p: number) => void;
+};
 let resolveStage: (stage: MarkStage | null) => void = () => {};
 export const markStage = new Promise<MarkStage | null>((r) => {
   resolveStage = r;

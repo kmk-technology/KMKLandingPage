@@ -1,12 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { useLang } from "../../i18n/context";
 import { gsap, prefersReducedMotion } from "../../lib/gsap";
-import {
-  markReady,
-  markStage,
-  type MarkRect,
-  type MarkStage,
-} from "../../lib/ready";
+import { markReady, markStage, type MarkStage } from "../../lib/ready";
 
 const MIN_MS = 3000; // long enough to watch the mark fill
 const MAX_MS = 4800; // never hold the page hostage on a slow network
@@ -27,21 +21,6 @@ function wave(level: number, phase: number, amp: number) {
   return d + `L${VW} ${VH}Z`;
 }
 
-const stages = {
-  vi: [
-    "Khởi tạo giao diện",
-    "Tải nội dung",
-    "Dựng không gian 3D",
-    "Sẵn sàng khám phá",
-  ],
-  en: [
-    "Preparing the interface",
-    "Loading content",
-    "Building the 3D scene",
-    "Ready to explore",
-  ],
-};
-
 /**
  * Preloader — the logo loads. The official KMK mark stands large in the middle and fills with
  * brand blue from the bottom up (a liquid surface with two offset waves) as real loading
@@ -52,15 +31,11 @@ const stages = {
  * Elsewhere two curtains (light, then brand blue) rise instead.
  */
 export default function Preloader() {
-  const { lang } = useLang();
   const root = useRef<HTMLDivElement>(null);
   const front = useRef<SVGPathElement>(null);
   const back = useRef<SVGPathElement>(null);
   const [pct, setPct] = useState(0);
-  const [ready, setReady] = useState(false);
   const [done, setDone] = useState(false);
-  const vi = lang === "vi";
-  const stageIdx = ready ? 3 : pct < 35 ? 0 : pct < 70 ? 1 : 2;
 
   useEffect(() => {
     const start = performance.now();
@@ -215,14 +190,15 @@ export default function Preloader() {
         const tl = gsap.timeline({ onComplete: finish });
         ctx.add(() => tl);
         tl.to(progress, { v: 100, duration: 0.6, ease: "power2.inOut" })
-          .call(() => setReady(true))
           // full: a light sweeps across the mark, which gives a small beat
+          // the light crosses the whole mark, then is gone
           .fromTo(
             ".pl-shine",
-            { xPercent: -130 },
-            { xPercent: 230, duration: 0.9, ease: "power2.inOut" },
+            { xPercent: -160, autoAlpha: 1 },
+            { xPercent: 260, duration: 1, ease: "power2.inOut" },
             "+=0.1",
           )
+          .set(".pl-shine", { autoAlpha: 0 })
           .to(
             ".pl-logo",
             {
@@ -254,45 +230,47 @@ export default function Preloader() {
 
         const target = stage;
         if (target) {
-          // fly onto the 3D mark: measured when the flight starts, so resizes are respected
+          // the logo becomes the 3D mark, in one continuous move:
+          //  1. behind the (still opaque) loader the 3D mark is placed flat on the exact spot of
+          //     the logo and starts rendering, so its first frames are already smooth;
+          //  2. the backdrop clears and the flat logo cross-fades into the identical 3D face;
+          //  3. a single eased progress drives depth, size, position and turn into the hero pose.
           const logo = root.current!.querySelector<HTMLElement>(".pl-logo")!;
-          let from: DOMRect | null = null;
-          let to: MarkRect | null = null;
-          const measure = () => {
-            from = logo.getBoundingClientRect();
-            to = target.rect();
-          };
-          tl.call(measure)
-            .set(".pl-blue", { autoAlpha: 0 })
+          const m = { p: 0 };
+          tl.call(() => {
+            const r = logo.getBoundingClientRect();
+            target.morph(0);
+            target.startAt({ x: r.left, y: r.top, w: r.width, h: r.height });
+            target.show();
+          })
+            .set(".pl-blue", { autoAlpha: 0 }, "+=0.15")
             .to(".pl-light", {
               backgroundColor: "rgba(244,247,253,0)",
-              duration: 0.9,
+              duration: 0.6,
               ease: "power2.inOut",
             })
             .to(
               ".pl-bg",
-              { autoAlpha: 0, duration: 0.7, ease: "power2.out" },
+              { autoAlpha: 0, duration: 0.6, ease: "power2.inOut" },
               "<",
             )
             .to(
               logo,
+              { autoAlpha: 0, duration: 0.45, ease: "power1.inOut" },
+              "<0.15",
+            )
+            .to(
+              m,
               {
-                x: () => to!.x + to!.w / 2 - (from!.left + from!.width / 2),
-                y: () => to!.y + to!.h / 2 - (from!.top + from!.height / 2),
-                scale: () => to!.w / from!.width,
-                duration: 1.1,
-                ease: "expo.inOut",
+                p: 1,
+                duration: 2.2,
+                // moves at once, then settles softly into the hero pose
+                ease: "power2.out",
+                onUpdate: () => target.morph(m.p),
               },
-              "<",
+              "<0.1",
             )
-            // the 2D logo dissolves into the identical 3D face, which then starts to turn
-            .call(() => target.show())
-            .to(
-              logo,
-              { autoAlpha: 0, duration: 0.35, ease: "power1.inOut" },
-              "+=0.05",
-            )
-            .call(release, undefined, "-=0.1");
+            .call(release, undefined, "<0.5");
         } else {
           tl.to(
             ".pl-logo",
@@ -344,16 +322,6 @@ export default function Preloader() {
           <div className="absolute -bottom-[30vmax] -right-[20vmax] h-[75vmax] w-[75vmax] rounded-full bg-[radial-gradient(circle,rgba(122,163,245,0.18),transparent_62%)]" />
         </div>
 
-        {/* top: the official logo and a thin rule */}
-        <div className="absolute inset-x-[var(--gutter)] top-6 flex items-center justify-between gap-6">
-          <img
-            src="/logo/kmk/long-logo-trim.png"
-            alt=""
-            className="pl-fade h-8 w-auto sm:h-9"
-          />
-          <span className="pl-fade hidden h-px flex-1 bg-gradient-to-r from-ink/10 to-transparent sm:block" />
-        </div>
-
         {/* the mark, large, at the exact centre */}
         <div className="absolute left-1/2 top-1/2 w-[var(--lw)] -translate-x-1/2 -translate-y-1/2">
           <div className="pl-glow absolute left-1/2 top-[62%] h-[70%] w-[130%] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(69,122,231,0.35),transparent)] blur-2xl" />
@@ -393,32 +361,13 @@ export default function Preloader() {
               className="absolute inset-0 overflow-hidden"
               style={{ WebkitMask: mask, mask }}
             >
-              <div className="pl-shine absolute inset-y-0 left-0 w-1/2 -translate-x-[130%] -skew-x-12 bg-gradient-to-r from-transparent via-white/70 to-transparent" />
+              <div className="pl-shine invisible absolute inset-y-0 left-0 w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/70 to-transparent opacity-0" />
             </div>
           </div>
         </div>
 
-        {/* bottom: the current step and slogan, and the large counter */}
-        <div className="absolute inset-x-[var(--gutter)] bottom-9 flex items-end justify-between gap-6">
-          <div className="pl-fade pb-2">
-            <p className="flex items-center gap-2 text-[1rem] font-semibold text-ink">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-brand" />
-              </span>
-              <span
-                key={stageIdx}
-                className="inline-block animate-[pl-swap_0.5s_ease-out]"
-              >
-                {(vi ? stages.vi : stages.en)[stageIdx]}
-              </span>
-            </p>
-            <p className="mt-1.5 max-w-[16rem] text-[0.875rem] leading-snug text-ink/50">
-              {vi
-                ? "Đơn giản hóa doanh nghiệp của bạn"
-                : "Simplify your business"}
-            </p>
-          </div>
+        {/* bottom: the large counter */}
+        <div className="absolute inset-x-[var(--gutter)] bottom-9 flex items-end justify-end">
           <p className="pl-fade flex items-start font-display text-[clamp(4.5rem,3rem+7vw,10rem)] font-bold leading-[0.85] text-ink tabular-nums">
             {String(pct).padStart(2, "0")}
             <span className="ml-1 mt-[0.08em] text-[0.38em] font-bold leading-none text-brand">

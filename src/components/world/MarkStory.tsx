@@ -76,6 +76,15 @@ export default function MarkStory() {
   const [beat, setBeat] = useState(0);
   const [inStory, setInStory] = useState(true);
   const [loaded, setLoaded] = useState(false);
+  // the scroll cue belongs to the opening: it hands its corner to the back-to-top button,
+  // which appears past 80% of the first screen
+  const [atTop, setAtTop] = useState(true);
+  useEffect(() => {
+    const on = () => setAtTop(window.scrollY < window.innerHeight * 0.8);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
   useEffect(() => void appReady.then(() => setLoaded(true)), []);
   const beats = vi
     ? [
@@ -126,7 +135,13 @@ export default function MarkStory() {
         };
         setMarkStage({
           rect: () => s.frontRect(),
+          startAt: (r) => s.startAt(r),
+          morph: (p) => s.setMorph(p),
           show: () => {
+            // measure the scroll-driven effects for the settled layout first: until then the
+            // stage fade could read a stale position and hide the canvas during the handoff
+            ScrollTrigger.refresh();
+            gsap.set(".ms-canvas", { autoAlpha: 1 });
             s.show();
             start();
           },
@@ -180,7 +195,7 @@ export default function MarkStory() {
         );
       ScrollTrigger.create({
         trigger: root.current,
-        start: "top top",
+        start: "top bottom",
         end: "bottom 60%",
         onToggle: (self) => setInStory(self.isActive),
       });
@@ -429,6 +444,20 @@ export default function MarkStory() {
         </span>
       </div>
 
+      {/* scroll cue, fixed on the right edge (mirrors the section counter on the left) */}
+      <a
+        href="#intro"
+        aria-label={vi ? "Cuộn xuống" : "Scroll down"}
+        className={`fixed bottom-8 right-5 z-30 hidden flex-col items-center gap-3 transition-opacity duration-500 lg:flex ${atTop && loaded ? "opacity-100" : "pointer-events-none opacity-0"}`}
+      >
+        <span className="text-[0.75rem] font-semibold uppercase text-ink/55 [writing-mode:vertical-rl]">
+          {vi ? "Cuộn xuống" : "Scroll down"}
+        </span>
+        <span className="relative block h-16 w-px overflow-hidden bg-ink/15">
+          <span className="absolute inset-x-0 top-0 h-1/2 animate-[scroll-cue_1.8s_ease-in-out_infinite] bg-brand" />
+        </span>
+      </a>
+
       {/* 01 - hero */}
       <section
         id="kmk"
@@ -444,7 +473,7 @@ export default function MarkStory() {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <h1
               id="hero-title"
-              className="max-w-[40rem] font-display text-[clamp(2.25rem,1.3rem+3.2vw,4.5rem)] font-semibold leading-[1.02] text-ink"
+              className="max-w-[44rem] font-display text-[clamp(2.5rem,1.3rem+4vw,5.75rem)] font-semibold leading-[1] text-ink"
             >
               {vi ? (
                 <>
