@@ -36,6 +36,10 @@ export type MarkScene = {
   play: () => void;
   show: () => void;
   frontRect: () => MarkRect;
+  /** Start the entrance from this screen rectangle (the loader logo), facing the viewer. */
+  startAt: (r: MarkRect) => void;
+  /** Entrance progress 0 (flat, on the loader logo) … 1 (hero pose), driven by the loader. */
+  setMorph: (p: number) => void;
   dispose: () => void;
 };
 
@@ -101,6 +105,8 @@ export async function createMarkScene(
     clearcoat: 1,
     clearcoatRoughness: 0.15,
   });
+  side.emissive.set(0x7aa3f5);
+  side.emissiveIntensity = 0;
   const body = new THREE.Mesh(geo, [face, side]);
   const mark = new THREE.Group();
   mark.add(body);
@@ -166,6 +172,26 @@ export async function createMarkScene(
 
   let anchors: (() => DOMRect[]) | null = null;
   /** World placement filling an anchor box: centred on it, its face exactly the box height. */
+  /** World placement whose logo face covers the screen rectangle (CSS px), facing the viewer. */
+  const fromRect = (b: {
+    left: number;
+    top: number;
+    width: number;
+    height: number;
+  }) => {
+    const r = canvas.getBoundingClientRect();
+    const z = camera.position.z;
+    const tx = ((b.left + b.width / 2 - r.left) / r.width - 0.5) * 2 * halfW;
+    const ty = (0.5 - (b.top + b.height / 2 - r.top) / r.height) * 2 * halfH;
+    const ts = ((b.height / r.height) * 2 * halfH) / HEIGHT;
+    const s = (z * ts) / (z + front * ts);
+    const k = (z - front * s) / z;
+    return { x: tx * k, y: ty * k, s };
+  };
+  // where the entrance starts (the loader logo); null = start in place
+  let start: { x: number; y: number; s: number } | null = null;
+  let morph = 0;
+
   const fromBox = (b: DOMRect) => {
     const r = canvas.getBoundingClientRect();
     const z = camera.position.z;
@@ -210,8 +236,9 @@ export async function createMarkScene(
   const draw = () => {
     const dt = Math.min(clock.getDelta(), 0.05);
     if (playing) {
-      intro = Math.min(1, intro + dt / 1.6);
-      if (!still) time += dt;
+      if (!start) intro = Math.min(1, intro + dt / 2);
+      // idle motion starts from zero once the entrance is over, so nothing jumps
+      if (!still && !start) time += dt;
     }
     const k = still ? 1 : 1 - Math.pow(0.002, dt); // weighted follow
     cur += (target - cur) * k;
@@ -225,30 +252,43 @@ export async function createMarkScene(
     // poses are in screen fractions (x: -1 left edge … 1 right edge);
     // phones: the mark rides the anchor slots instead
     const ride = mobile ? follow(dt) : null;
-    const x = ride ? 0 : lerp(a.x, b.x) * halfW;
-    const y = ride ? ride.y : lerp(a.y, b.y) * halfH;
-    const s = ride ? ride.s : lerp(a.scale, b.scale);
+    const x0 = ride ? 0 : lerp(a.x, b.x) * halfW;
+    const y0 = ride ? ride.y : lerp(a.y, b.y) * halfH;
+    const s0 = ride ? ride.s : lerp(a.scale, b.scale);
+    // entrance from the loader logo: ONE progress (eased by the loader's timeline) drives
+    // everything, so position, size, depth and turn move together. At 0 the mark is flat and
+    // covers the loader logo exactly; the depth extrudes over the first part, while the mark
+    // grows and glides into the hero pose with a slight turn that shows its sides.
+    const ent = Boolean(start) && !still;
+    const e = ent ? morph : 1;
+    const X = start ? start.x + (x0 - start.x) * e : x0;
+    const Y = start ? start.y + (y0 - start.y) * e : y0;
+    const s = start ? start.s + (s0 - start.s) * e : s0;
     const spin = ride?.spin ?? 0;
     mark.visible = shadow.visible = shown && s > 0.005;
     pc.x += (px - pc.x) * k * 0.5;
     pc.y += (py - pc.y) * k * 0.5;
 
-    // entrance: from facing the viewer (where the loader logo landed) into the pose, with a turn
-    const ie = 1 - Math.pow(1 - intro, 3);
-    const turn = Math.sin(ie * Math.PI) * 0.6;
-    mark.position.set(x, y + Math.sin(time * 0.8) * 0.08 * ie, 0);
+    const poseRx = lerp(a.rx, b.rx) - pc.y * 0.25;
+    const poseRy =
+      lerp(a.ry, b.ry) + pc.x * 0.5 + Math.sin(time * 0.45) * 0.12 + spin;
+    const ie = ent ? e : 1 - Math.pow(1 - intro, 3);
+    const depth = ent ? THREE.MathUtils.smoothstep(e, 0, 0.45) : 1;
+    body.scale.z = Math.max(0.015, depth);
+    side.emissiveIntensity = ent ? Math.sin(depth * Math.PI) * 0.35 : 0;
+    mark.position.set(X, Y + Math.sin(time * 0.8) * 0.08 * ie, 0);
     mark.scale.setScalar(s);
-    mark.rotation.set(
-      (lerp(a.rx, b.rx) - pc.y * 0.25) * ie,
-      (lerp(a.ry, b.ry) + pc.x * 0.5 + Math.sin(time * 0.45) * 0.12 + spin) *
-        ie -
-        turn,
-      0,
-    );
-    shadow.position.set(x, y - (HEIGHT / 2 + 0.8) * s, 0);
+    if (ent) {
+      const arc = Math.sin(e * Math.PI); // 0 → 1 → 0: an extra turn in the middle
+      mark.rotation.set(poseRx * e - 0.18 * arc, poseRy * e + 0.55 * arc, 0);
+    } else {
+      const turn = Math.sin(ie * Math.PI) * 0.6;
+      mark.rotation.set(poseRx * ie, poseRy * ie - turn, 0);
+    }
+    shadow.position.set(X, Y - (HEIGHT / 2 + 0.8) * s, 0);
     shadow.scale.setScalar(s);
     shadowMat.opacity = ie;
-    key.target.position.set(x, y, 0);
+    key.target.position.set(X, Y, 0);
     renderer.render(scene, camera);
   };
   const frame = () => {
@@ -278,6 +318,19 @@ export async function createMarkScene(
     },
     show: () => {
       shown = true;
+    },
+    setMorph: (p) => {
+      morph = p;
+      if (p >= 1 && start) {
+        start = null;
+        intro = 1;
+        time = 0;
+      }
+    },
+    startAt: (rc) => {
+      camera.updateMatrixWorld();
+      start = fromRect({ left: rc.x, top: rc.y, width: rc.w, height: rc.h });
+      if (running) draw();
     },
     // screen rectangle (CSS px) of the logo face while the mark faces the viewer at its hero spot
     frontRect: () => {

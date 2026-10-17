@@ -672,3 +672,13 @@ html.deck body {
     transform: none;
   }
 }
+
+/* hero scroll cue: a light runs down the line */
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}

@@ -300,7 +300,11 @@ export default function Header({ variant = "home" }: Props) {
       <div className="relative z-20 px-[var(--gutter)] pt-3">
         {/* The bar keeps its full layout width; contracting is a clip (--ix) on the glass plus
             transforms on the logo and actions - nothing re-lays out per frame, so it stays smooth. */}
-        <div ref={barRef} className="relative mx-auto h-16 max-w-[1360px]">
+        {/* same width as the page content (.shell: 1360px including its gutters) */}
+        <div
+          ref={barRef}
+          className="relative mx-auto h-16 max-w-[calc(1360px-2*var(--gutter))]"
+        >
           <span
             aria-hidden="true"
             className={`lg-shadow pointer-events-none absolute inset-y-0 rounded-full transition-opacity duration-500 ${glass ? "opacity-100" : "opacity-0"}`}
@@ -370,16 +374,6 @@ export default function Header({ variant = "home" }: Props) {
               <span className="hidden sm:inline-flex">
                 <LangSwitch />
               </span>
-              <a
-                href="/#contact"
-                onClick={() => close(false)}
-                className="group hidden h-11 items-center gap-2 rounded-full bg-brand/90 pl-5 pr-1.5 text-[0.875rem] font-semibold text-white shadow-[inset_0_1px_0.5px_rgba(255,255,255,0.7),inset_0_-6px_12px_-8px_rgba(0,0,0,0.25),0_10px_24px_-10px_rgba(69,122,231,0.8)] transition-colors hover:bg-brand sm:inline-flex"
-              >
-                {vi ? "Liên hệ" : "Contact us"}
-                <span className="grid h-8 w-8 place-items-center rounded-full bg-white text-brand transition-transform duration-500 group-hover:rotate-[-45deg]">
-                  <Icon name="arrowRight" />
-                </span>
-              </a>
               <button
                 ref={toggleRef}
                 type="button"

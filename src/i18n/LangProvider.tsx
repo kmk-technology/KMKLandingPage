@@ -24,7 +24,7 @@ function initialLang(): Lang {
   } catch {
     /* storage unavailable (private mode) - fall through */
   }
-  return "vi"; // Vietnamese by default; English only by explicit choice or ?lang=en
+  return "en"; // English by default; Vietnamese by explicit choice (VI toggle) or ?lang=vi
 }
 
 export default function LangProvider({ children }: { children: ReactNode }) {
