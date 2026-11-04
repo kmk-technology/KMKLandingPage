@@ -40,6 +40,8 @@ export type MarkScene = {
   startAt: (r: MarkRect) => void;
   /** Entrance progress 0 (flat, on the loader logo) … 1 (hero pose), driven by the loader. */
   setMorph: (p: number) => void;
+  /** Extra turn (radians) around the vertical axis, eased - used by pinned chapters. */
+  setTwist: (r: number) => void;
   dispose: () => void;
 };
 
@@ -73,11 +75,12 @@ export async function createMarkScene(
   // product-shot lighting
   const key = new THREE.SpotLight(0xffffff, 60, 40, Math.PI / 5, 0.8, 1.4);
   key.position.set(5, 7, 9);
-  const rim = new THREE.DirectionalLight(0xa9c4ff, 2.2);
+  const rim = new THREE.DirectionalLight(0xa7cbf6, 2.2);
   rim.position.set(-6, 3, -6);
   const fill = new THREE.DirectionalLight(0xffffff, 0.8);
   fill.position.set(-4, -2, 6);
-  scene.add(key, key.target, rim, fill, new THREE.AmbientLight(0xffffff, 0.35));
+  const ambient = new THREE.AmbientLight(0xffffff, 0.35);
+  scene.add(key, key.target, rim, fill, ambient);
 
   // the mark: faces carry the official logo image (crisp letters), sides are glossy blue
   const { geo, texture, front } = await buildMark(
@@ -99,13 +102,13 @@ export async function createMarkScene(
   });
   face.toneMapped = false;
   const side = new THREE.MeshPhysicalMaterial({
-    color: 0x3f73e0,
+    color: 0x1e6fd9,
     roughness: 0.28,
     metalness: 0.1,
     clearcoat: 1,
     clearcoatRoughness: 0.15,
   });
-  side.emissive.set(0x7aa3f5);
+  side.emissive.set(0x5ea2f0);
   side.emissiveIntensity = 0;
   const body = new THREE.Mesh(geo, [face, side]);
   const mark = new THREE.Group();
@@ -191,6 +194,8 @@ export async function createMarkScene(
   // where the entrance starts (the loader logo); null = start in place
   let start: { x: number; y: number; s: number } | null = null;
   let morph = 0;
+  let twist = 0;
+  let twistS = 0;
 
   const fromBox = (b: DOMRect) => {
     const r = canvas.getBoundingClientRect();
@@ -207,9 +212,7 @@ export async function createMarkScene(
     const p = poses[0];
     const first = mobile ? anchors?.()[0] : undefined;
     if (first) return fromBox(first);
-    return mobile
-      ? { x: 0, y: halfH * 0.1, s: p.scale * 0.5 }
-      : { x: p.x * halfW, y: p.y * halfH, s: p.scale };
+    return { x: p.x * halfW, y: p.y * halfH, s: p.scale };
   };
 
   // phones: the mark is pinned to one anchor slot and scrolls with it, exactly like an image in
@@ -270,8 +273,13 @@ export async function createMarkScene(
     pc.y += (py - pc.y) * k * 0.5;
 
     const poseRx = lerp(a.rx, b.rx) - pc.y * 0.25;
+    twistS += (twist - twistS) * k;
     const poseRy =
-      lerp(a.ry, b.ry) + pc.x * 0.5 + Math.sin(time * 0.45) * 0.12 + spin;
+      twistS +
+      lerp(a.ry, b.ry) +
+      pc.x * 0.5 +
+      Math.sin(time * 0.45) * 0.12 +
+      spin;
     const ie = ent ? e : 1 - Math.pow(1 - intro, 3);
     const depth = ent ? THREE.MathUtils.smoothstep(e, 0, 0.45) : 1;
     body.scale.z = Math.max(0.015, depth);
@@ -318,6 +326,9 @@ export async function createMarkScene(
     },
     show: () => {
       shown = true;
+    },
+    setTwist: (r) => {
+      twist = r;
     },
     setMorph: (p) => {
       morph = p;

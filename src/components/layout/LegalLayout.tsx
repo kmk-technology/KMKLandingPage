@@ -3,8 +3,8 @@ import { useLang } from "../../i18n/context";
 import { ScrollTrigger } from "../../lib/gsap";
 import { appReady } from "../../lib/ready";
 import Icon from "../ui/Icon";
-import Footer from "./Footer";
-import Header from "./Header";
+import SiteFooter from "../site/SiteFooter";
+import SiteHeader from "../site/SiteHeader";
 
 type Props = { title: string; product: string; children: ReactNode };
 type Entry = { id: string; text: string };
@@ -105,7 +105,7 @@ export default function LegalLayout({ title, product, children }: Props) {
 
   return (
     <>
-      <Header variant="page" />
+      <SiteHeader />
       <div aria-hidden="true" className="fixed inset-x-0 top-0 z-[60] h-[3px]">
         <div ref={bar} className="h-full origin-left scale-x-0 bg-brand" />
       </div>
@@ -178,7 +178,7 @@ export default function LegalLayout({ title, product, children }: Props) {
           </article>
         </div>
       </main>
-      <Footer />
+      <SiteFooter />
     </>
   );
 }

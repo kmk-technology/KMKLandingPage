@@ -172,3 +172,9 @@ export function Phone({ p }: { p: Product }) {
     </div>
   );
 }
+
+/** The bare product screen (no device frame), for browser-window mockups. */
+export function Screen({ p }: { p: Product }) {
+  if (p.key === "kmk-sales") return <PosScreen p={p} />;
+  return <ClinicScreen p={p} />;
+}

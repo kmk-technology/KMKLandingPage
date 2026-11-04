@@ -4,6 +4,6 @@ import type { IconName } from "./Icon";
 export const serviceIcon: Record<ServiceKey, IconName> = {
   software: "code",
   erp: "layers",
-  cloud: "server",
+  digital: "spark",
   outsourcing: "users",
 };
