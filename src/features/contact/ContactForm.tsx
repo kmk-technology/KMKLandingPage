@@ -93,7 +93,7 @@ const errorText: Record<ErrorCode, L> = {
 };
 
 const inputCls =
-  "w-full rounded-xl border bg-[#f6f8fb] px-4 py-3.5 text-[1rem] text-ink placeholder:text-subtle transition-[border-color,background-color,box-shadow] duration-300 focus:border-brand focus:bg-canvas focus:shadow-[0_0_0_4px_rgb(33_118_245/0.12)] focus:outline-none";
+  "w-full rounded-xl border bg-white px-4 py-3.5 text-[1rem] text-ink placeholder:text-subtle transition-[border-color,background-color,box-shadow] duration-300 focus:border-brand focus:bg-canvas focus:shadow-[0_0_0_4px_rgb(33_118_245/0.12)] focus:outline-none";
 
 function Field({
   id,
@@ -152,6 +152,13 @@ export default function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const statusRef = useRef<HTMLDivElement>(null);
   const inflight = useRef(false);
+
+  // A link such as /contact?topic=erp arrives with the topic already chosen.
+  useEffect(() => {
+    const topic = new URLSearchParams(window.location.search).get("topic");
+    if (topic && enquiryTopics.some((e) => e.key === topic))
+      setValues((v) => ({ ...v, topic }));
+  }, []);
 
   // CTAs elsewhere on the page can pre-select a topic.
   useEffect(

@@ -22,13 +22,6 @@
     overflow: hidden;
   }
 
-  /* while the preloader runs nothing scrolls (set in index.html before any script) */
-  html.is-loading,
-  html.is-loading body {
-    overflow: hidden;
-    overscroll-behavior: none;
-  }
-
   ::selection {
     background: var(--brand);
     color: #fff;
@@ -310,7 +303,7 @@
   }
   .card-hover:hover {
     transform: translateY(-6px);
-    border-color: rgb(69 122 231 / 0.25);
+    border-color: rgb(35 121 229 / 0.25);
     box-shadow:
       0 1px 2px rgb(15 23 42 / 0.04),
       0 40px 70px -36px rgb(0 0 0 / 0.38);
@@ -366,13 +359,13 @@
     width: 64px;
     height: 64px;
     border-color: rgb(58 107 214 / 0.6);
-    background: rgb(69 122 231 / 0.08);
+    background: rgb(35 121 229 / 0.08);
   }
   .cursor-ring[data-state="label"] .cursor-ring-body {
     width: 96px;
     height: 96px;
     border-color: transparent;
-    background: #457ae7;
+    background: #2379e5;
     font-size: 0.8125rem;
   }
   .cursor-ring[data-state="hidden"] .cursor-ring-body {
@@ -515,7 +508,7 @@
       inset 0 0 0 0.5px rgb(255 255 255 / 0.5),
       inset 1.5px 2px 1px -1px rgb(255 255 255 / 0.95),
       inset -1.5px -2px 1px -1px rgb(255 255 255 / 0.55),
-      inset 0 -10px 18px -14px rgb(69 122 231 / 0.35),
+      inset 0 -10px 18px -14px rgb(35 121 229 / 0.35),
       inset 0 10px 18px -12px rgb(255 255 255 / 0.55);
   }
   /* rim light: brightest on the side facing the light */
@@ -576,9 +569,9 @@
     box-shadow:
       inset 0 0 0 0.5px rgb(255 255 255 / 0.9),
       inset 1px 1.5px 1px -0.5px rgb(255 255 255 / 1),
-      inset 0 -6px 10px -8px rgb(69 122 231 / 0.45),
-      0 0 0 0.5px rgb(69 122 231 / 0.18),
-      0 6px 14px -6px rgb(69 122 231 / 0.45);
+      inset 0 -6px 10px -8px rgb(35 121 229 / 0.45),
+      0 0 0 0.5px rgb(35 121 229 / 0.18),
+      0 6px 14px -6px rgb(35 121 229 / 0.45);
   }
 }
 
@@ -594,7 +587,7 @@
     backdrop-filter: blur(10px) saturate(160%);
     box-shadow:
       inset 0 1px 0.5px rgb(255 255 255 / 1),
-      inset 0 -4px 8px -6px rgb(69 122 231 / 0.4),
+      inset 0 -4px 8px -6px rgb(35 121 229 / 0.4),
       0 0 0 0.5px rgb(0 0 0 / 0.06),
       0 12px 28px -12px rgb(20 40 90 / 0.35);
   }
@@ -631,7 +624,7 @@ html.deck body {
     transition: opacity 0.4s;
     background: radial-gradient(
       420px circle at var(--mx, 50%) var(--my, 50%),
-      rgb(69 122 231 / 0.14),
+      rgb(35 121 229 / 0.14),
       transparent 60%
     );
   }
@@ -646,7 +639,7 @@ html.deck body {
     transition: opacity 0.4s;
     background: radial-gradient(
       260px circle at var(--mx, 50%) var(--my, 50%),
-      rgb(69 122 231 / 0.7),
+      rgb(35 121 229 / 0.7),
       transparent 70%
     );
     -webkit-mask:
@@ -680,5 +673,88 @@ html.deck body {
   }
   100% {
     transform: translateY(200%);
+  }
+}
+
+/* ---------- Home: soft motion in the showcase panel and cards ---------- */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(40px);
+  animation: blob-drift 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes blob-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, -8%, 0) scale(1.12);
+  }
+  100% {
+    transform: translate3d(-6%, 6%, 0) scale(0.94);
+  }
+}
+.grad-pan {
+  background-size: 220% 220%;
+  animation: grad-pan 10s ease-in-out infinite alternate;
+}
+@keyframes grad-pan {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .blob,
+  .grad-pan {
+    animation: none;
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [class*="animate-[fade-up"] {
+    animation: none !important;
+  }
+}
+
+/* ---------- Site: page entrance, 3D tilt cards ---------- */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.page-enter {
+  animation: page-enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+/* cards lean towards the pointer (--rx/--ry set in JS) and lift while hovered */
+.tilt {
+  transform: perspective(900px) rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px)) !important;
+  transition:
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s,
+    border-color 0.5s !important;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none;
   }
 }

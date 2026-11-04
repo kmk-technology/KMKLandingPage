@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Header from "../../components/layout/Header";
+import SiteHeader from "../../components/site/SiteHeader";
 import Icon from "../../components/ui/Icon";
 import { useLang } from "../../i18n/context";
 
@@ -17,7 +17,7 @@ export default function NotFound() {
 
   return (
     <>
-      <Header variant="page" />
+      <SiteHeader />
       <main
         id="main"
         className="relative grid min-h-[100svh] place-items-center overflow-hidden bg-[radial-gradient(ellipse_70%_60%_at_50%_45%,#ffffff_0%,#eef2fb_55%,#e3eaf8_100%)] px-[var(--gutter)] pb-20 pt-[calc(var(--header-h)+4rem)]"
@@ -57,7 +57,7 @@ export default function NotFound() {
               </span>
             </a>
             <a
-              href="/#contact"
+              href="/contact"
               className="inline-flex min-h-[50px] items-center rounded-full border border-ink/15 bg-white/70 px-6 font-semibold text-ink transition-colors hover:border-brand hover:text-brand"
             >
               {vi ? "Liên hệ KMK" : "Contact KMK"}

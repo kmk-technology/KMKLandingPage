@@ -82,7 +82,7 @@ export default function BackToTop() {
           cy="24"
           r={R}
           fill="none"
-          stroke="rgba(69,122,231,0.18)"
+          stroke="rgba(35,121,229,0.18)"
           strokeWidth="2"
         />
         <circle
@@ -91,7 +91,7 @@ export default function BackToTop() {
           cy="24"
           r={R}
           fill="none"
-          stroke="#457ae7"
+          stroke="#2379e5"
           strokeWidth="2"
           strokeLinecap="round"
           strokeDasharray={C}

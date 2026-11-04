@@ -10,7 +10,7 @@ type Props = {
 /*
  * Product glyphs, drawn as clean vectors from the motifs of each product's official badge
  * (public/logo/*-logo.*): MEDIFAM - family care (heart + medical cross); KMK Sales - the
- * shopping bag with a confirmed sale; KMK WMS - the warehouse with rising stock bars.
+ * shopping bag with a confirmed sale.
  */
 const glyphs: Record<string, ReactNode> = {
   medifam: (
@@ -24,13 +24,6 @@ const glyphs: Record<string, ReactNode> = {
       <path d="M5.6 8.4h12.8l-1.1 11.2H6.7L5.6 8.4Z" />
       <path d="M9 8.4V7a3 3 0 0 1 6 0v1.4" />
       <path d="m9.3 14 2 2 3.6-3.7" />
-    </>
-  ),
-  "kmk-wms": (
-    <>
-      <path d="M3.6 9.8 12 4.8l8.4 5" />
-      <path d="M5.6 9v10.4h12.8V9" />
-      <path d="M9.2 19.4v-3.6M12 19.4v-5.8M14.8 19.4v-2.4" />
     </>
   ),
 };
@@ -60,7 +53,7 @@ export function ProductMonogram({
       style={{
         background: white
           ? "rgba(255,255,255,0.18)"
-          : "linear-gradient(150deg, #7aa3f5 0%, #457ae7 45%, #2f5fcc 100%)",
+          : "linear-gradient(150deg, #5ea2f0 0%, #2379e5 45%, #1a5fc0 100%)",
       }}
     >
       {/* glass highlight across the top half */}

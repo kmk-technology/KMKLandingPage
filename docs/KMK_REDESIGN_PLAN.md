@@ -1,38 +1,19 @@
-# KMK Technology - Redesign Plan (current direction)
+# KMK Technology - Redesign Plan (current direction, 2026-10-29)
 
-**"One object, many beats" - after [oryzo.ai](https://oryzo.ai/) (Lusion)**, requested by the client.
-The official KMK mark, traced from `logo-mark.png` and extruded in three.js, is the only 3D element.
-It is lit like a product shot (spot key, cool rim, fill, studio reflections) on a transparent canvas
-fixed behind the page, and every section moves it to a new pose with weighted easing.
+**Built from the company profile** ("Hồ sơ năng lực KMK Technology", 2025): content and order follow
+the profile, and so does the visual language (white pages, brand-blue diagonal slabs, rings, hexagon
+dots, bold uppercase titles, blue gradient cards). Normal scrolling with calm, one-off reveals.
 
-| # | Section (`id`) | What happens |
-|---|---|---|
-| 01 | Hero (`kmk`) | Huge faint "KMK" behind the mark, which spins in after the loader; headline bottom-left |
-| 02 | About (`intro`) | Editorial spread: statement lights up word by word on scroll; mission, vision, values. Mark on the right |
-| 03 | Services (`services`) | Four spec callouts with leader lines pointing at the mark in the centre |
-| 04 | Products (`products`) | Three-column line-up (MEDIFAM, KMK Sales, KMK WMS); mark small above the title |
-| 05 | Clients (`clients`) | Counts + grid of all client logos; mark on the left |
-| 06 | Technology (`platform`) | Numbered platform list with tech chips; mark on the right |
-| - | Contact (`contact`), footer | Regular sections |
+Sections (`src/components/world/MarkStory.tsx`, data in `src/content/site.ts`):
+opening (3D mark in a ring on blue slabs, stats) → 01 company → 02 history (blue band, timeline
+11+ / 2022 / Medifam) → 03 vision · mission · core values → 04 services (4, from the profile) →
+05 products (Medifam, KMK Sales, KMK WMS, Digital Information) → 06 strengths + technology marquee →
+07 benefits → 08 team (org chart, motto "Your faith - Our services") → 09 clients → slogan band →
+contact → footer.
 
-Loader: the official HD mark fills with blue from the bottom up as real loading progress advances
-(light sweep, "KMK Technology", small %). On the home page the text then lifts away, the screen
-clears and the logo flies onto the face of the 3D mark (same size and spot, `lib/ready.ts` markStage)
-and dissolves into it; the 3D mark then turns into its pose. Deep links and other routes skip the flight.
+Loader: hexagon outline + lens opening, handing over to the 3D mark.
 
-3D mark: analytic rounded hexagon fitted to `logo-mark-hd.png` (crop of logo-nbg.png), smooth-shaded
-bevel, the logo image on the face (emissive, not tone-mapped) so the letters match the artwork exactly.
-Phones: the mark travels between empty anchor slots at the top of each section (`.ms-anchor`).
-It fades out as the story ends.
-
-Modern layer: kinetic section titles (words rise out of masks), a vertical section HUD on screens
-1440px and wider, cards that tilt toward the pointer with a following light, the slogan band
-("Đơn giản hóa doanh nghiệp của bạn") sliding and leaning with scroll speed before Contact, and the
-liquid-glass header with lens refraction. Product marks: glyph tiles (MEDIFAM heart + cross,
-KMK Sales bag + check, KMK WMS warehouse + bars) drawn from the motifs of the official badges, with
-typeset names.
-
-Copy: professional company-introduction voice in VI and EN; the hero headline is the slogan.
+---
 
 Palette `#457ae7` + matte black for text, light studio backdrop. Font: Google Sans Flex.
 Code: `src/components/world/` (markScene.ts, MarkStory.tsx, logoGeometry.ts), `src/components/layout/Preloader.tsx`.

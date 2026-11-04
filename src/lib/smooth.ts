@@ -75,6 +75,16 @@ export function scrollToEl(el: HTMLElement, immediate = false) {
   }
 }
 
+/** Scroll to a page offset (used by the cinematic story to jump to a scene). */
+export function scrollToY(y: number, immediate = false) {
+  if (lenis) lenis.scrollTo(y, { immediate, force: true });
+  else
+    window.scrollTo({
+      top: y,
+      behavior: immediate || prefersReducedMotion() ? "auto" : "smooth",
+    });
+}
+
 export function lockScroll(locked: boolean) {
   if (locked) lenis?.stop();
   else lenis?.start();

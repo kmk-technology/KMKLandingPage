@@ -6,8 +6,31 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
+import { SHOW_CAREERS } from "./components/site/pages";
 import NotFound from "./pages/error/404";
+import About from "./pages/about";
+import Clients from "./pages/clients";
+import Contact from "./pages/contact";
 import Home from "./pages/Home";
+import Product from "./pages/product";
+import Products from "./pages/products";
+import Technology from "./pages/technology";
+
+// the site pages (menu order) ship with the app, so moving between them never waits on a load
+const pages = {
+  products: Products,
+  product: Product,
+  technology: Technology,
+  clients: Clients,
+  about: About,
+  careers: lazy(() => import("./pages/careers")),
+  contact: Contact,
+};
+const page = (Page: ComponentType) => (
+  <Suspense fallback={<PageFallback />}>
+    <Page />
+  </Suspense>
+);
 
 // Project pages (e.g. /projects/medcg/policy) are registered automatically from the folder structure.
 const ROUTES = import.meta.glob([
@@ -42,16 +65,9 @@ const projectRoutes = Object.keys(ROUTES).map((file) => {
   );
 });
 
+/** Holds the page height while a rarely used page (legal, careers) loads; shows nothing. */
 function PageFallback() {
-  return (
-    <div
-      className="grid min-h-[100svh] place-items-center"
-      role="status"
-      aria-live="polite"
-    >
-      <span className="text-sm text-muted">Đang tải trang… / Loading…</span>
-    </div>
-  );
+  return <div className="min-h-[100svh] bg-white" />;
 }
 
 export default function AppRouter() {
@@ -60,6 +76,15 @@ export default function AppRouter() {
       <Routes>
         <Route path="/" element={<Outlet />}>
           <Route index element={<Home />} />
+          <Route path="products" element={page(pages.products)} />
+          <Route path="product/:slug" element={page(pages.product)} />
+          <Route path="technology" element={page(pages.technology)} />
+          <Route path="clients" element={page(pages.clients)} />
+          <Route path="about" element={page(pages.about)} />
+          {SHOW_CAREERS ? (
+            <Route path="careers" element={page(pages.careers)} />
+          ) : null}
+          <Route path="contact" element={page(pages.contact)} />
           <Route path="projects" element={<Outlet />}>
             <Route index element={<Navigate to="/" replace />} />
             {projectRoutes}
