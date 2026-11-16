@@ -40,8 +40,8 @@ export const jobs: Job[] = [
     team: "engineering",
     level: { vi: "1+ năm kinh nghiệm", en: "1+ years" },
     summary: {
-      vi: "Xây dựng giao diện web cho Medifam, KMK Sales và các dự án khách hàng.",
-      en: "Build the web front ends of Medifam, KMK Sales and client projects.",
+      vi: "Xây dựng giao diện web cho Medifam, Digital Transformation và các dự án khách hàng.",
+      en: "Build the web front ends of Medifam, Digital Transformation and client projects.",
     },
     duties: [
       {
@@ -227,8 +227,8 @@ export const jobs: Job[] = [
     team: "business",
     level: { vi: "1+ năm kinh nghiệm", en: "1+ years" },
     summary: {
-      vi: "Giới thiệu Medifam, KMK Sales và dịch vụ của KMK tới khách hàng mới.",
-      en: "Bring Medifam, KMK Sales and KMK's services to new clients.",
+      vi: "Giới thiệu Medifam, Digital Transformation và dịch vụ của KMK tới khách hàng mới.",
+      en: "Bring Medifam, Digital Transformation and KMK's services to new clients.",
     },
     duties: [
       {
@@ -265,8 +265,8 @@ export const perks: {
       en: "Real products, real users",
     },
     body: {
-      vi: "Làm trên Medifam, KMK Sales và các dự án cho doanh nghiệp, cơ sở y tế đang vận hành mỗi ngày.",
-      en: "Work on Medifam, KMK Sales and projects that businesses and clinics run on every day.",
+      vi: "Làm trên Medifam, Digital Transformation và các dự án cho doanh nghiệp, cơ sở y tế đang vận hành mỗi ngày.",
+      en: "Work on Medifam, Digital Transformation and projects that businesses and clinics run on every day.",
     },
   },
   {

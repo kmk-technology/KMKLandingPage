@@ -38,8 +38,8 @@ export default function ProductsPage() {
       }
       description={
         vi
-          ? "Medifam, KMK Sales, Digital Information và các dịch vụ phần mềm, ERP, chuyển đổi số, gia công phần mềm của KMK Technology."
-          : "Medifam, KMK Sales, Digital Information and KMK Technology's software, ERP, digital transformation and outsourcing services."
+          ? "Medifam, Digital Transformation và các dịch vụ phần mềm, ERP, chuyển đổi số, gia công phần mềm của KMK Technology."
+          : "Medifam, Digital Transformation and KMK Technology's software, ERP, digital transformation and outsourcing services."
       }
     >
       <div ref={root}>
@@ -65,7 +65,7 @@ export default function ProductsPage() {
           aria-label={vi ? "Sản phẩm" : "Products"}
           className="pb-[clamp(4.5rem,11vh,7rem)]"
         >
-          <ul className="shell fade-group grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="shell fade-group grid gap-5 sm:grid-cols-2">
             {products.map((p, i) => (
               <li key={p.key}>
                 <PictureCard

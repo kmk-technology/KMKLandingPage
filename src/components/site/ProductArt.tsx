@@ -11,13 +11,6 @@ const productPhotos: Record<string, { src: string; alt: L }> = {
       en: "A doctor and her patient checking appointments on Medifam",
     },
   },
-  "kmk-sales": {
-    src: "/products/photo-kmk-sales.webp",
-    alt: {
-      vi: "Chủ cửa hàng vui mừng xem doanh thu trên KMK Sales",
-      en: "A shop owner cheering at the day's revenue on KMK Sales",
-    },
-  },
   "digital-info": {
     src: "/products/photo-digital-info.webp",
     alt: {

@@ -44,37 +44,23 @@ export default function ProductPage() {
               : "general, specialist and family",
           },
           {
-            v: "medifam.vn",
-            l: vi ? "website chính thức" : "official website",
+            v: vi ? "Hồ sơ" : "Records",
+            l: vi
+              ? "quản lý hồ sơ bệnh án hiệu quả"
+              : "medical records managed efficiently",
           },
         ]
-      : p.key === "kmk-sales"
-        ? [
-            {
-              v: vi ? "Bán lẻ" : "Retail",
-              l: vi ? "cửa hàng, chuỗi cửa hàng" : "shops and chains",
-            },
-            {
-              v: vi ? "Mọi lúc" : "Anywhere",
-              l: vi ? "làm việc mọi lúc, mọi nơi" : "work any time, anywhere",
-            },
-            {
-              v: "kmksales.vn",
-              l: vi ? "website chính thức" : "official website",
-            },
-          ]
-        : [
-            { v: "Microsoft", l: vi ? "nền tảng triển khai" : "platform" },
-            { v: "Power Apps", l: vi ? "ứng dụng nội bộ" : "internal apps" },
-            {
-              v: "AI",
-              l: vi ? "trợ lý và tự động hóa" : "assistants and automation",
-            },
-          ];
+      : [
+          { v: "Microsoft", l: vi ? "nền tảng triển khai" : "platform" },
+          { v: "Power Apps", l: vi ? "ứng dụng nội bộ" : "internal apps" },
+          {
+            v: "AI",
+            l: vi ? "trợ lý và tự động hóa" : "assistants and automation",
+          },
+        ];
   const benefitIcons: IconName[] = ["layers", "shield", "spark", "server"];
   const productIcon: Record<string, IconName> = {
     medifam: "shield",
-    "kmk-sales": "layers",
     "digital-info": "spark",
   };
   const btn =

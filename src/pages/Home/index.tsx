@@ -46,8 +46,8 @@ export default function Home() {
       }
       description={
         vi
-          ? "Công ty TNHH Công Nghệ KMK (KMK Technology) chuyên cung cấp các giải pháp công nghệ thông tin sáng tạo và đáng tin cậy. Sản phẩm: MEDIFAM, KMK Sales, Digital Information."
-          : "KMK Technology Co., Ltd. provides creative and reliable information technology solutions. Products: MEDIFAM, KMK Sales, Digital Information."
+          ? "Công ty TNHH Công Nghệ KMK (KMK Technology) chuyên cung cấp các giải pháp công nghệ thông tin sáng tạo và đáng tin cậy. Sản phẩm: MEDIFAM, Digital Transformation."
+          : "KMK Technology Co., Ltd. provides creative and reliable information technology solutions. Products: MEDIFAM, Digital Transformation."
       }
     >
       <MarkStory />
