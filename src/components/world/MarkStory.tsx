@@ -6,6 +6,7 @@ import {
   medicalClients,
   products,
   services,
+  homeCopy,
 } from "../../content/site";
 import { Link } from "react-router-dom";
 import { useLang } from "../../i18n/context";
@@ -325,9 +326,7 @@ export default function MarkStory() {
     {
       to: "/products",
       title: vi ? "Sản phẩm và dịch vụ" : "Products and services",
-      body: vi
-        ? "MEDIFAM, KMK Sales, Digital Information cùng các dịch vụ phần mềm, ERP và chuyển đổi số."
-        : "MEDIFAM, KMK Sales, Digital Information and our software, ERP and digital transformation services.",
+      body: t(homeCopy.productsArea),
       visual: (
         <img
           src="/home/pillar-products.webp"
@@ -341,9 +340,7 @@ export default function MarkStory() {
     {
       to: "/technology",
       title: vi ? "Công nghệ" : "Technology",
-      body: vi
-        ? "Giải pháp số hóa 360 độ, tích hợp AI, Social Platform cùng hệ sinh thái công nghệ đa dạng."
-        : "360-degree digitalisation, AI and social platform integration, with a diverse technology ecosystem.",
+      body: t(homeCopy.technologyArea),
       visual: (
         <img
           src="/home/pillar-technology.webp"
@@ -395,9 +392,7 @@ export default function MarkStory() {
             ) : null}
           </h1>
           <p className="hx-in mx-auto mt-5 max-w-[48rem] text-[1.125rem] leading-relaxed text-ink/75">
-            {vi
-              ? "KMK Technology chuyên cung cấp các giải pháp công nghệ thông tin sáng tạo và đáng tin cậy: phát triển phần mềm, tư vấn giải pháp ERP, tư vấn chuyển đổi số và gia công phần mềm."
-              : "KMK Technology provides creative and reliable information technology solutions: software development, ERP consulting, digital transformation consulting and software outsourcing."}
+            {t(homeCopy.lead)}
           </p>
         </div>
 
@@ -440,9 +435,7 @@ export default function MarkStory() {
                 KMK Technology
               </p>
               <p className="hx-pin font-display text-[clamp(1.6rem,1.2rem+1.3vw,2.4rem)] font-normal leading-[1.2] text-[#14306b]">
-                {vi
-                  ? "Phần mềm · ERP · Chuyển đổi số"
-                  : "Software · ERP · Digital"}
+                {t(homeCopy.positioning)}
               </p>
             </div>
           </div>
@@ -712,7 +705,7 @@ export default function MarkStory() {
             ))}
             <Link
               to="/contact"
-              className="grad-pan tilt group flex rounded-[1.75rem] lg:col-span-2 min-h-[17.5rem] flex-col justify-between bg-[linear-gradient(120deg,#1a5fc0,#2379e5,#4f95ec,#2379e5)] p-8 text-white"
+              className="grad-pan tilt group flex rounded-[1.75rem] sm:col-span-2 lg:col-span-3 min-h-[17.5rem] flex-col justify-between bg-[linear-gradient(120deg,#1a5fc0,#2379e5,#4f95ec,#2379e5)] p-8 text-white"
             >
               <span>
                 <span className="block font-display text-[1.75rem] font-normal leading-tight">

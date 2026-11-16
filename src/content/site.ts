@@ -29,10 +29,28 @@ export const company = {
   messengerHref: "https://m.me/61571784489341",
   websites: [
     { label: "kmk-tech.vn", href: "https://kmk-tech.vn/" },
-    { label: "medifam.vn", href: "https://medifam.vn/" },
     { label: "yhgd.vn", href: "https://yhgd.vn/" },
-    { label: "kmksales.vn", href: "https://kmksales.vn/" },
   ],
+};
+
+/** Home page copy (wording supplied by KMK, 2026-11-13). */
+export const homeCopy = {
+  lead: {
+    vi: "Chúng tôi đơn giản hóa quản trị doanh nghiệp bằng sức mạnh của AI. Phần mềm thế hệ mới tích hợp trí tuệ nhân tạo giúp tự động hóa quy trình, giảm thiểu sai sót và tối ưu hiệu suất làm việc. Chúng tôi biến các thao tác phức tạp thành trải nghiệm đơn giản, giúp doanh nghiệp tập trung vào giá trị cốt lõi.",
+    en: "We simplify business management with the power of AI. Next-generation software with built-in artificial intelligence automates processes, reduces errors and optimises productivity. We turn complex tasks into simple experiences, so businesses can focus on their core value.",
+  } as L,
+  positioning: {
+    vi: "Giải pháp phần mềm chuyển đổi số trong kỷ nguyên AI",
+    en: "Digital transformation software for the AI era",
+  } as L,
+  productsArea: {
+    vi: "Hệ thống phần mềm Y khoa Medifam, xây dựng các giải pháp chuyển đổi số E2E trên nền tảng Microsoft Platform tích hợp ERP, tư vấn triển khai và hỗ trợ vận hành phần mềm ERP (Oracle EBS, SAP).",
+    en: "The Medifam medical software system, end-to-end digital transformation solutions on the Microsoft Platform integrated with ERP, and consulting, implementation and operations support for ERP software (Oracle EBS, SAP).",
+  } as L,
+  technologyArea: {
+    vi: "Ứng dụng các công nghệ hiện đại tiên tiến của thế giới, dễ dàng tương thích tích hợp với các hệ thống vệ tinh.",
+    en: "Applying the world's most advanced modern technologies, easily compatible and integrated with satellite systems.",
+  } as L,
 };
 
 export type NavItem = { label: L; id: string };
@@ -284,31 +302,11 @@ export const products: Product[] = [
     },
     from: "#2379e5",
     to: "#2379e5",
-    href: "https://medifam.vn/",
-    hrefLabel: "medifam.vn",
-  },
-  {
-    key: "kmk-sales",
-    mark: ["KMK ", "Sales"],
-    name: "KMK Sales",
-    monogram: "S",
-    category: {
-      vi: "Phần mềm Quản lý Bán hàng",
-      en: "Sales management software",
-    },
-    description: {
-      vi: "Phần mềm quản lý bán hàng dành cho các chủ doanh nghiệp. Đáp ứng đầy đủ các nghiệp vụ quản lý bán hàng, giúp khách hàng tối đa hóa năng lực kinh doanh cửa hàng. Làm việc mọi lúc, mọi nơi.",
-      en: "Sales management software for business owners. It covers every sales management task, helping stores get the most out of their business. Work any time, anywhere.",
-    },
-    from: "#1b68cc",
-    to: "#1b68cc",
-    href: "https://kmksales.vn/",
-    hrefLabel: "kmksales.vn",
   },
   {
     key: "digital-info",
-    mark: ["Digital ", "Information"],
-    name: "Digital Information",
+    mark: ["Digital ", "Transformation"],
+    name: "Digital Transformation",
     monogram: "D",
     category: {
       vi: "AI, PowerApp, automation trên Microsoft Platform",
